@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Crusade. Revealed Gospel Ministries</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .crusade-columns {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+    margin-top: 24px;
+  }
+  @media (max-width: 768px) {
+    .crusade-columns {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+  .crusade-section-title {
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+    color: var(--ink);
+    border-bottom: 2px solid var(--dawn-gold);
+    display: inline-block;
+    padding-bottom: 6px;
+  }
+  .crusade-story {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: rgba(14, 28, 59, 0.88);
+  }
+  .crusade-story p {
+    margin-bottom: 20px;
+  }
+  .detail-sidebar-card {
+    background: #fff;
+    border: 1px solid var(--line-dark);
+    border-radius: 8px;
+    padding: 28px;
+    box-shadow: 0 4px 20px rgba(14,28,59,0.05);
+    position: sticky;
+    top: 100px;
+  }
+  .detail-sidebar-card h4 {
+    font-family: var(--display);
+    font-size: 1.35rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+  .detail-meta-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .detail-meta-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(14,28,59,0.08);
+  }
+  .detail-meta-list li:last-child {
+    border-bottom: none;
+  }
+  .meta-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: rgba(14, 28, 59, 0.6);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+  }
+  .detail-meta-list li strong {
+    font-size: 0.95rem;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .detail-meta-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .detail-meta-badge.upcoming {
+    background: rgba(201, 162, 74, 0.15);
+    color: #a37c2a;
+    border: 1px solid rgba(201, 162, 74, 0.3);
+  }
+  .detail-meta-badge.past {
+    background: rgba(14, 28, 59, 0.08);
+    color: rgba(14, 28, 59, 0.7);
+    border: 1px solid rgba(14, 28, 59, 0.15);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><img src="logo.jpg" alt="RGM logo"> Revealed Gospel Ministries</div>
+    <div class="nav-menu" id="navMenu">
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">About <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="index.html#about">About Us</a>
+            <a href="index.html#mission">Mission</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Our Work <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="crusades.html">Crusades</a>
+            <a href="charity.html">Charity Works</a>
+            <a href="testimonies.html">Testimonies</a>
+            <a href="excellency.html">Excellency</a>
+            <a href="sermons.html">Sermons</a>
+          </div>
+        </div>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a href="index.html#give" class="btn btn-primary">Give</a>
+      </div>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<section class="dark" id="crusadeIntro">
+  <div class="wrap">
+    <p style="opacity:0.7;">Loading crusade…</p>
+  </div>
+</section>
+
+<section id="crusadeDetailsSection" style="display:none; background: var(--parchment); color: var(--ink); padding: 76px 0 96px; border-bottom:1px solid rgba(14,28,59,0.08);">
+  <div class="wrap">
+    <div class="crusade-columns animate-on-scroll">
+      <div class="crusade-main-col">
+        <h3 class="crusade-section-title">The Story & Mission Impact</h3>
+        <div id="crusadeFullDescription" class="crusade-story"></div>
+      </div>
+      <div class="crusade-side-col">
+        <div class="detail-sidebar-card">
+          <h4>Crusade Info</h4>
+          <ul class="detail-meta-list">
+            <li>
+              <span class="meta-label">Date & Time</span>
+              <strong id="metaDate"></strong>
+            </li>
+            <li>
+              <span class="meta-label">Location / Venue</span>
+              <strong id="metaLocation"></strong>
+            </li>
+            <li>
+              <span class="meta-label">Status</span>
+              <div style="margin-top:4px;"><span id="metaStatusBadge"></span></div>
+            </li>
+            <li id="metaPartnerItem" style="display:none;">
+              <span class="meta-label">Partner Churches</span>
+              <strong id="metaPartners" style="font-size:0.88rem; display:block; margin-top:4px; line-height:1.4;"></strong>
+            </li>
+          </ul>
+          <div id="sidebarCTA" style="margin-top:24px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="crusadeVideos" style="display:none;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Highlights</div>
+      <h2>Watch Highlights</h2>
+    </div>
+    <div class="media-grid reveal" id="crusadeMediaGrid"></div>
+  </div>
+</section>
+
+<section id="crusadeTestimonies" class="dark" style="display:none;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Changed Lives</div>
+      <h2>Testimonies from this Crusade</h2>
+    </div>
+    <div class="media-grid reveal" id="crusadeTestimoniesGrid"></div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Revealed Gospel Ministries</h4>
+        <p style="opacity:0.75; font-size:0.9rem; max-width:280px;">An evangelistical movement empowered to preach the gospel of salvation and reach out to the lost souls across the nations. Based in Mzuzu, Malawi.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="crusades.html">Crusades</a></li>
+          <li><a href="index.html#charity">Charity Works</a></li>
+          <li><a href="testimonies.html">Testimonies</a></li>
+          <li><a href="excellency.html">Excellency</a></li>
+          <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="index.html#give">Give</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Mzuzu, Malawi</li>
+          <li>Always open</li>
+          <li>+265 881 65 07 53</li><li>+265 997 17 38 15</li>
+          <li>revealedgospelministry@gmail.com</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="https://www.facebook.com/profile.php?id=100083659636556" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://web.facebook.com/messages/t/100083659636556/" target="_blank" rel="noopener">Messenger</a></li>
+          <li><a href="https://www.youtube.com/@alickmalcom4220" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Revealed Gospel Ministries. All rights reserved.</span>
+      <span>In partnership with Life Ministries Malawi</span>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  function escapeHtml(str) {
+    return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  async function loadCrusadeDetail() {
+    const introSection = document.getElementById('crusadeIntro');
+    const slug = new URLSearchParams(window.location.search).get('slug');
+
+    if (!slug) {
+      introSection.querySelector('.wrap').innerHTML = `<p>No crusade specified.</p><p style="margin-top:16px;"><a href="crusades.html" class="btn btn-outline">Back to Crusades</a></p>`;
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/crusades/${encodeURIComponent(slug)}`);
+      if (!res.ok) throw new Error('Not found');
+      const c = await res.json();
+
+      document.getElementById('pageTitle').textContent = `${c.title}. Revealed Gospel Ministries`;
+      const isUpcoming = c.status === 'upcoming';
+
+      introSection.querySelector('.wrap').innerHTML = `
+        <div class="crusade-detail-grid animate-on-scroll">
+          <div class="crusade-poster" style="border-radius:6px; overflow:hidden; box-shadow:0 12px 32px rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.08);">
+            <img src="${c.poster_url || ''}" alt="${c.title} poster" class="poster-img" onerror="this.style.display='none'">
+            <span class="crusade-badge ${isUpcoming ? 'upcoming' : 'past'}">${isUpcoming ? 'Upcoming' : 'Past'}</span>
+          </div>
+          <div>
+            <div class="eyebrow" style="color:var(--dawn-gold); margin-bottom:16px;">${c.date_range || ''}${c.location ? ' · ' + c.location : ''}</div>
+            <h2 style="margin-bottom:18px; font-size: clamp(2rem, 4vw, 3rem);">${c.title}</h2>
+            <p style="color:rgba(247,243,234,0.85); margin-bottom:24px; font-size:1.1rem; line-height:1.7; font-weight:400; max-width:680px;">${c.description || ''}</p>
+            ${isUpcoming ? `<a href="index.html#give" class="btn btn-primary">Support This Crusade</a>` : ''}
+          </div>
+        </div>`;
+
+      // Full details population
+      const narrative = c.full_description || c.description || '';
+      document.getElementById('crusadeFullDescription').innerHTML = narrative
+        .split('\n\n')
+        .map(p => p.trim())
+        .filter(p => p.length > 0)
+        .map(p => `<p>${escapeHtml(p)}</p>`)
+        .join('');
+
+      document.getElementById('metaDate').textContent = c.date_range || 'To Be Announced';
+      document.getElementById('metaLocation').textContent = c.location || 'To Be Announced';
+
+      const badge = document.getElementById('metaStatusBadge');
+      badge.className = 'detail-meta-badge ' + (isUpcoming ? 'upcoming' : 'past');
+      badge.textContent = isUpcoming ? 'Upcoming' : 'Past';
+
+      if (c.partner_churches) {
+        document.getElementById('metaPartnerItem').style.display = 'block';
+        document.getElementById('metaPartners').textContent = c.partner_churches;
+      } else {
+        document.getElementById('metaPartnerItem').style.display = 'none';
+      }
+
+      const ctaDiv = document.getElementById('sidebarCTA');
+      if (isUpcoming) {
+        ctaDiv.innerHTML = `<a href="index.html#give" class="btn btn-primary" style="width:100%; justify-content:center; text-align:center;">Support This Crusade</a>`;
+      } else {
+        ctaDiv.innerHTML = `<a href="#crusadeVideos" class="btn btn-outline-dark" style="width:100%; justify-content:center; text-align:center;">Watch Highlights</a>`;
+      }
+
+      document.getElementById('crusadeDetailsSection').style.display = 'block';
+
+      const highlights = (c.media || []).filter(m => m.type === 'highlight');
+      if (highlights.length) {
+        document.getElementById('crusadeVideos').style.display = '';
+        document.getElementById('crusadeMediaGrid').innerHTML = highlights
+          .map(m => mediaCardHTML({ url: m.youtube_url, eyebrow: 'Crusade Highlight', title: m.title || c.title }))
+          .join('');
+      }
+
+      if ((c.testimonies || []).length) {
+        document.getElementById('crusadeTestimonies').style.display = '';
+        document.getElementById('crusadeTestimoniesGrid').innerHTML = c.testimonies
+          .map(t => mediaCardHTML({ url: t.youtube_url, eyebrow: 'Testimony', title: t.title }))
+          .join('');
+      }
+    } catch (err) {
+      console.error(err);
+      introSection.querySelector('.wrap').innerHTML = `<p>Couldn't find that crusade.</p><p style="margin-top:16px;"><a href="crusades.html" class="btn btn-outline">Back to Crusades</a></p>`;
+    }
+  }
+  loadCrusadeDetail();
+</script>
+<script src="script.js"></script>
+</body>
+</html>

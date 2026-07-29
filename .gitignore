@@ -1,0 +1,8 @@
+node_modules/
+.wrangler/
+.aider.tags.cache.v4/
+.aider.chat.history.md
+.aider.input.history
+*.log
+.env
+.aider*

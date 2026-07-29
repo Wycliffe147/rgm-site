@@ -1,0 +1,15 @@
+{
+  "name": "rgm-site",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev public",
+    "deploy": "wrangler pages deploy public",
+    "db:init": "wrangler d1 execute rgm_db --file=./schema.sql",
+    "db:init:remote": "wrangler d1 execute rgm_db --remote --file=./schema.sql",
+    "db:migrate": "wrangler d1 execute rgm_db --local --file=./migration_dates.sql -y",
+    "db:migrate:remote": "wrangler d1 execute rgm_db --remote --file=./migration_dates.sql -y"
+  },
+  "devDependencies": {
+    "wrangler": "^3"
+  }
+}
