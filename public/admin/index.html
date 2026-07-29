@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -421,10 +421,7 @@ async function openFormModal(editItemObj = null) {
       </div>
       <div id="separate_date_fields" style="display:none;">
         <div class="form-group">
-          <label>Dates (comma or newline separated, format: YYYY-MM-DD)</label>
-          <textarea id="field_custom_dates" placeholder="2026-10-09&#10;2026-10-15" style="min-height:80px; font-family:monospace; font-size:0.9rem;">${(() => {try{return JSON.parse(editItemObj?.custom_dates||"").join(\
-
-);}}catch(e){return''}})()||''}</textarea>
+          <textarea id="field_custom_dates" placeholder="2026-10-09&#10;2026-10-15" style="min-height:80px; font-family:monospace; font-size:0.9rem;">${(() => { try { return JSON.parse(editItemObj?.custom_dates || "[]").join('\n'); } catch(e) { return ''; } })()}</textarea>
         </div>
       </div>
       <div class="form-group">
