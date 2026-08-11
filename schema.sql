@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS partner_registrations (
   name TEXT NOT NULL,
   email TEXT,
   phone TEXT,
-  partnership_type TEXT CHECK(partnership_type IN ('prayer', 'volunteer', 'church')) NOT NULL,
+  partnership_type TEXT CHECK(partnership_type IN ('prayer', 'volunteer', 'church', 'financial')) NOT NULL,
   message TEXT,
   status TEXT CHECK(status IN ('new', 'contacted', 'active')) NOT NULL DEFAULT 'new',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

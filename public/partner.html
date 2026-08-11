@@ -242,6 +242,60 @@
     margin-bottom: 12px;
   }
 
+  /* Financial partner options */
+  .financial-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .financial-option-card {
+    background: #fff;
+    border: 1px solid var(--line-dark);
+    border-radius: 10px;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(14,28,59,0.05);
+  }
+  .financial-option-card h3 {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin: 0;
+  }
+  .financial-option-card p {
+    color: #5a5f70;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .financial-subscribe-form {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .financial-subscribe-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid var(--line-dark);
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+  .financial-subscribe-form input:focus {
+    outline: none;
+    border-color: var(--dawn-gold);
+  }
+
   /* Pending notice */
   .pending-notice {
     background: rgba(201,162,74,0.1);
@@ -300,6 +354,7 @@
           <button class="nav-drop-btn">Partner <span class="drop-arrow">▾</span></button>
           <div class="drop-menu">
             <a href="partner.html">Join the Mission</a>
+            <a href="partner.html#financial">Become a Financial Partner</a>
             <a href="partner.html#register">Register to Help</a>
             <a href="partner.html#testimonies">Partner Testimonies</a>
             <a href="partner.html#share">Share Your Experience</a>
@@ -371,7 +426,7 @@
         <div class="partner-card-icon">🙏</div>
         <h3>Prayer Partner</h3>
         <p>Commit to intercede for our crusades, evangelists, and those who hear the gospel. Prayer is the engine that drives every breakthrough we've ever seen.</p>
-        <a href="#register" class="partner-card-cta">Become a Prayer Partner →</a>
+        <a href="#register" class="partner-card-cta" onclick="selectPartnerType('prayer')">Become a Prayer Partner →</a>
       </div>
 
       <!-- Volunteer -->
@@ -379,7 +434,7 @@
         <div class="partner-card-icon">🤝</div>
         <h3>Volunteer</h3>
         <p>Join us on the ground. Help with logistics, outreach teams, and crusade operations. Your hands and feet on the field make every event possible.</p>
-        <a href="#register" class="partner-card-cta">Join as a Volunteer →</a>
+        <a href="#register" class="partner-card-cta" onclick="selectPartnerType('volunteer')">Join as a Volunteer →</a>
       </div>
 
       <!-- Church Partner -->
@@ -387,7 +442,48 @@
         <div class="partner-card-icon">⛪</div>
         <h3>Church Partner</h3>
         <p>Partner as a local church to co-host, refer attendees, or provide facilities for crusades. Together we ensure every new believer finds a spiritual home.</p>
-        <a href="#register" class="partner-card-cta">Partner as a Church →</a>
+        <a href="#register" class="partner-card-cta" onclick="selectPartnerType('church')">Partner as a Church →</a>
+      </div>
+
+      <!-- Financial Partner -->
+      <div class="partner-card-item">
+        <div class="partner-card-icon">💰</div>
+        <h3>Financial Partner</h3>
+        <p>Become a Kingdom financier today. Your regular giving fuels crusades, charity works, and gospel outreach across Malawi.</p>
+        <a href="#financial" class="partner-card-cta">Become a Financial Partner →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 2.5: FINANCIAL PARTNERS
+     ============================================= -->
+<section id="financial">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-left: auto; margin-right: auto; text-align: center;">
+      <div class="eyebrow" style="color: var(--dawn-gold);">Kingdom Finance</div>
+      <h2>Become a Kingdom Financier Today</h2>
+      <p style="color: #5a5f70; margin-top: 14px; max-width: 600px; margin-left: auto; margin-right: auto;">Your giving fuels crusades, charity works, and souls reached across Malawi. Subscribe to stay in the loop, or register as a financial partner to receive crusade reports and newsletters directly.</p>
+    </div>
+
+    <div class="financial-options reveal">
+      <div class="financial-option-card">
+        <div class="partner-card-icon">📧</div>
+        <h3>Subscribe for Updates</h3>
+        <p>Get crusade reports, impact stories, and newsletters straight to your inbox. No commitment; unsubscribe anytime.</p>
+        <form class="financial-subscribe-form" onsubmit="submitNewsletter(event)">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <div class="newsletter-msg" style="display:none; font-size:0.85rem;"></div>
+      </div>
+
+      <div class="financial-option-card">
+        <div class="partner-card-icon">💰</div>
+        <h3>Register as a Financial Partner</h3>
+        <p>Commit to regularly support RGM's mission. Our team will reach out personally and keep you close to the impact of every gift.</p>
+        <a href="#register" class="partner-card-cta" onclick="selectPartnerType('financial')">Register to Give →</a>
       </div>
     </div>
   </div>
@@ -429,6 +525,7 @@
             <option value="prayer">🙏 Prayer Partner</option>
             <option value="volunteer">🤝 Volunteer</option>
             <option value="church">⛪ Church Partner</option>
+            <option value="financial">💰 Financial Partner</option>
           </select>
         </div>
 
@@ -558,7 +655,6 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Revealed Gospel Ministries. All rights reserved.</span>
-      <span>In partnership with Life Ministries Malawi</span>
       <span>Developed by <a href="https://wyport.vercel.app" target="_blank" rel="noopener" style="color:var(--dawn-gold);opacity:1;">Wycliffe Mwanganda</a></span>
     </div>
   </div>
@@ -567,6 +663,19 @@
 <script src="data.js"></script>
 <script src="script.js"></script>
 <script>
+  // =============================================
+  // PRESELECT PARTNERSHIP TYPE FROM CARD CTAS
+  // =============================================
+  function selectPartnerType(type) {
+    const select = document.getElementById('regType');
+    if (!select) return;
+    select.value = type;
+    // Brief highlight so it's clear the field was auto-filled
+    select.style.transition = 'box-shadow 0.3s ease';
+    select.style.boxShadow = '0 0 0 3px rgba(201,162,74,0.5)';
+    setTimeout(() => { select.style.boxShadow = 'none'; }, 1200);
+  }
+
   // =============================================
   // PARTNER REGISTRATION FORM
   // =============================================

@@ -31,12 +31,42 @@
             <a href="testimonies.html">Testimonies</a>
             <a href="excellency.html">Excellency</a>
             <a href="sermons.html">Sermons</a>
+            <a href="crossover.html">Annual Crossover</a>
           </div>
         </div>
-        <a href="index.html#contact">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Spiritual Support <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="support.html">Spiritual Support Hub</a>
+            <a href="support.html#pastor">Talk to a Pastor</a>
+            <a href="support.html#prayer">Submit Prayer Request</a>
+            <a href="support.html#counsel">Live Chat</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Partner <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="partner.html">Join the Mission</a>
+            <a href="partner.html#financial">Become a Financial Partner</a>
+            <a href="partner.html#register">Register to Help</a>
+            <a href="partner.html#testimonies">Partner Testimonies</a>
+            <a href="partner.html#share">Share Your Experience</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Discussions <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="discussions.html">All Discussions</a>
+            <a href="discussions.html?category=bible-study">Bible Study</a>
+            <a href="discussions.html?category=prayer">Prayer Focus</a>
+            <a href="discussions.html?category=testimony">Testimonies</a>
+            <a href="discussions.html?category=general">General</a>
+          </div>
+        </div>
+        <a href="contact.html">Contact</a>
       </div>
       <div class="nav-cta">
-        <a href="index.html#give" class="btn btn-primary">Give</a>
+        <a href="give.html" class="btn btn-primary">Give</a>
       </div>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -70,44 +100,94 @@
   </div>
 </section>
 
-<section id="give" class="dark">
-  <div class="wrap give-grid">
-    <div class="give-copy reveal">
-      <div class="section-head" style="margin-bottom:24px;">
-        <div class="eyebrow">Partner With Us</div>
-        <h2>Support RGM Charity Works.</h2>
+<section id="give" class="dark" style="padding: 80px 0;">
+  <div class="wrap">
+
+    <div class="section-head reveal" style="margin-bottom:24px; text-align:center;">
+      <div class="eyebrow">Partner With Us</div>
+      <h2>Support RGM Charity Works</h2>
+      <p style="max-width:600px; margin:14px auto 0; opacity:0.85;">You can become part of this mission by supporting RGM Charity Works. Your generous gift helps us bring hope, restore dignity, and share Christ's love with those in need. Choose the option that matches where you're giving from:</p>
+    </div>
+
+    <!-- Tab Selector Buttons -->
+    <div class="give-tabs reveal" style="display:flex; justify-content:center; gap:16px; margin-bottom:48px;">
+      <button class="tab-btn active" data-target="malawi" style="padding:12px 32px; font-weight:600; border-radius:30px; border:2px solid var(--dawn-gold); background:var(--dawn-gold); color:var(--ink-deep); cursor:pointer; font-size:1.1rem; transition:all 0.25s;">Malawi Donors</button>
+      <button class="tab-btn" data-target="international" style="padding:12px 32px; font-weight:600; border-radius:30px; border:2px solid rgba(255,255,255,0.15); background:transparent; color:#fff; cursor:pointer; font-size:1.1rem; transition:all 0.25s;">International Donors</button>
+    </div>
+
+    <!-- MALAWI TAB CONTENT -->
+    <div id="tab-malawi" class="give-grid tab-content active-content reveal">
+      <div class="give-copy">
+        <div class="section-head" style="margin-bottom:24px;">
+          <div class="eyebrow">Local Giving</div>
+          <h2>Support Charity Works from within Malawi</h2>
+        </div>
+        <p>Your support covers food relief, charity outreach logistics, and community aid delivered through RGM Charity Works. Choose your preferred method below:</p>
+
+        <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px; margin-top:20px;">
+          <h4>Direct Bank Transfer</h4>
+          <p style="margin:0;"><strong>Account Name:</strong> Revealed Gospel Ministries</p>
+          <p style="margin:0;"><strong>Local MWK Account:</strong> 1008907157</p>
+          <p style="margin:0;"><strong>Bank:</strong> National Bank of Malawi</p>
+          <p style="margin:0; opacity:0.8; font-size:0.85rem; line-height:1.4; margin-top:8px;">*Please add "Charity Works" as your transfer reference.</p>
+        </div>
       </div>
-      <p>You can become part of this mission by supporting RGM Charity Works. Your generous gift will help us continue bringing hope, restoring dignity, and sharing Christ's love with those in need.</p>
-      <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px;">
-        <h4>Give via PayPal (International)</h4>
-        <p style="margin:0;">International donors can support RGM Charity Works securely in USD, EUR, or other currencies using credit card or PayPal.</p>
-        <div id="paypal-container-B3HP9R34J74W2" style="margin-top:10px; width:100%; min-height:50px;"></div>
-      </div>
-      <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px; margin-top:14px;">
-        <h4>Give via Stewardship (UK)</h4>
-        <p style="margin:0;">UK donors can give through our official Stewardship page (choose 'Charity Works' designation).</p>
-        <a href="https://www.stewardship.org.uk/partners/20453789" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:6px;">Give on Stewardship →</a>
-      </div>
-      <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px; margin-top:14px;">
-        <h4>Bank Transfer</h4>
-        <p style="margin:0;">GBP account: 1014382557. SWIFT code: NBMAMWMW. National Bank of Malawi</p>
-        <p style="margin:0;">Local MWK account: 1008907157. National Bank of Malawi</p>
+
+      <div class="give-panel">
+        <h3 style="margin-bottom:6px;">Give via Mobile Money &amp; Cards</h3>
+        <p style="font-size:0.85rem; opacity:0.8; margin-bottom:16px; line-height:1.4;">Pay securely using <strong>Airtel Money</strong>, <strong>TNM Mpamba</strong>, <strong>Visa/Mastercard</strong>, or <strong>Bank Transfer</strong>.</p>
+        <div class="amt-row">
+          <button class="amt active" data-value="50000">K50,000</button>
+          <button class="amt" data-value="100000">K100,000</button>
+          <button class="amt" data-value="500000">K500,000</button>
+          <button class="amt" data-value="other">Other</button>
+        </div>
+        <div id="charityCustomAmtContainer" style="display:none; margin-bottom:16px;">
+          <label for="charityCustomAmt">Custom Amount (MWK)</label>
+          <input type="number" id="charityCustomAmt" placeholder="Enter amount in MWK" min="1" style="width:100%; padding:10px; border-radius:4px; border:1px solid var(--line); background:rgba(255,255,255,0.04); color:#fff;">
+        </div>
+        <label for="charityName">Full Name</label>
+        <input type="text" id="charityName" placeholder="Your name" style="margin-bottom:16px;">
+        <label for="charityEmail">Email or Phone</label>
+        <input type="text" id="charityEmail" placeholder="For receipt" style="margin-bottom:24px;">
+        <button class="btn btn-primary" data-action="charity-give" style="width:100%; justify-content:center;">Continue to Payment</button>
       </div>
     </div>
-    <div class="give-panel reveal">
-      <h3 style="margin-bottom:8px;">Give to Charity Works</h3>
-      <div class="amt-row">
-        <button class="amt active">K50,000</button>
-        <button class="amt">K100,000</button>
-        <button class="amt">K500,000</button>
-        <button class="amt">Other</button>
+
+    <!-- INTERNATIONAL TAB CONTENT (Hidden by default) -->
+    <div id="tab-international" class="give-grid tab-content reveal" style="display:none;">
+      <div class="give-copy">
+        <div class="section-head" style="margin-bottom:24px;">
+          <div class="eyebrow">Global Giving</div>
+          <h2>Support Charity Works from outside Malawi</h2>
+        </div>
+        <p>We welcome support from partners worldwide. UK and international donors can use the secure portals below:</p>
+
+        <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px; margin-top:20px;">
+          <h4>Give via Stewardship (UK)</h4>
+          <p style="margin:0;">UK donors can give through our official Stewardship fundraising page. Please choose the "Charity Works" designation, with Gift Aid added automatically where eligible.</p>
+          <a href="https://www.stewardship.org.uk/partners/20453789" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:6px;">Give on Stewardship →</a>
+        </div>
+
+        <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px; margin-top:14px;">
+          <h4>Give via PayPal (International)</h4>
+          <p style="margin:0;">International donors outside Malawi/UK can support Charity Works securely in USD, EUR, or other currencies using a credit card or PayPal account.</p>
+          <div id="paypal-container-B3HP9R34J74W2" style="margin-top:10px; width:100%; min-height:50px;"></div>
+        </div>
       </div>
-      <label>Full Name</label>
-      <input type="text" placeholder="Your name" style="margin-bottom:16px;">
-      <label>Email or Phone</label>
-      <input type="text" placeholder="For receipt" style="margin-bottom:24px;">
-      <button class="btn btn-primary" data-action="charity-give" style="width:100%; justify-content:center;">Continue to Payment</button>
+
+      <div class="give-panel">
+        <h3 style="margin-bottom:16px;">International Bank Wire</h3>
+        <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px; background:rgba(255,255,255,0.02); padding:20px; border-radius:6px; border:1px solid var(--line);">
+          <p style="margin:0;"><strong>Account Name:</strong> Revealed Gospel Ministries</p>
+          <p style="margin:0;"><strong>GBP Account:</strong> 1014382557</p>
+          <p style="margin:0;"><strong>SWIFT / BIC Code:</strong> NBMAMWMW</p>
+          <p style="margin:0;"><strong>Bank Name:</strong> National Bank of Malawi</p>
+          <p style="margin:0; opacity:0.8; font-size:0.85rem; line-height:1.4; margin-top:8px;">*Use these details for direct wire transfers from international banks. Please reference "Charity Works".</p>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -127,6 +207,10 @@
           <li><a href="testimonies.html">Testimonies</a></li>
           <li><a href="excellency.html">Excellency</a></li>
           <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="support.html">Spiritual Support</a></li>
+          <li><a href="partner.html">Partner with Us</a></li>
+          <li><a href="discussions.html">Discussions</a></li>
+          <li><a href="crossover.html">Annual Crossover</a></li>
           <li><a href="index.html#give">Give</a></li>
         </ul>
       </div>
@@ -147,19 +231,68 @@
           <li><a href="https://www.youtube.com/@alickmalcom4220" target="_blank" rel="noopener">YouTube</a></li>
         </ul>
       </div>
+      <div>
+        <h4>Newsletter</h4>
+        <p style="opacity:0.75; font-size:0.85rem; margin-bottom:12px; line-height:1.5;">Subscribe for updates on our crusades, testimonies, and newsletters.</p>
+        <form class="newsletter-form" onsubmit="submitNewsletter(event)" style="display:flex; gap:6px;">
+          <input type="email" placeholder="Your email" required style="flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--line); color:#fff; padding:10px; border-radius:4px; font-size:0.85rem; min-width:0;">
+          <button type="submit" class="btn btn-primary" style="padding:0 12px; font-size:0.85rem; border-radius:4px;">Join</button>
+        </form>
+        <div class="newsletter-msg" style="display:none; font-size:0.8rem; margin-top:8px;"></div>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Revealed Gospel Ministries. All rights reserved.</span>
-      <span>In partnership with Life Ministries Malawi</span>
+      <span>Developed by <a href="https://wyport.vercel.app" target="_blank" rel="noopener" style="color:var(--dawn-gold);opacity:1;">Wycliffe Mwanganda</a></span>
     </div>
   </div>
 </footer>
 
 <script src="data.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://in.paychangu.com/js/popup.js"></script>
 <script>
   loadCharityStories('charityGrid');
   setupSearch('charitySearch', q => loadCharityStories('charityGrid', null, { search: q }));
 </script>
 <script src="script.js"></script>
+<script>
+  // Tab toggling logic for give section (Malawi vs International)
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Reset active state from all buttons
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.style.background = 'transparent';
+        b.style.borderColor = 'rgba(255,255,255,0.15)';
+        b.style.color = '#fff';
+      });
+
+      // Add active state to clicked button
+      btn.classList.add('active');
+      btn.style.background = 'var(--dawn-gold)';
+      btn.style.borderColor = 'var(--dawn-gold)';
+      btn.style.color = 'var(--ink-deep)';
+
+      // Hide all tab contents
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.style.display = 'none';
+      });
+
+      // Show active tab content
+      const targetId = `tab-${btn.getAttribute('data-target')}`;
+      const targetContent = document.getElementById(targetId);
+      if (targetContent) {
+        targetContent.style.display = 'grid';
+      }
+
+      // Lazy-initialize PayPal button the first time International tab is shown.
+      // Must happen AFTER the container is visible so PayPal can measure dimensions.
+      if (btn.getAttribute('data-target') === 'international') {
+        initPaypalLinks();
+      }
+    });
+  });
+</script>
 </body>
 </html>

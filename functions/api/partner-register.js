@@ -13,7 +13,7 @@ export async function onRequestPost(context) {
       return Response.json({ error: 'Name and Partnership Type are required' }, { status: 400 });
     }
 
-    const validTypes = ['prayer', 'volunteer', 'church'];
+    const validTypes = ['prayer', 'volunteer', 'church', 'financial'];
     if (!validTypes.includes(partnership_type)) {
       return Response.json({ error: 'Invalid partnership type' }, { status: 400 });
     }
