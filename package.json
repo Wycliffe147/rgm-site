@@ -2,7 +2,8 @@
   "name": "rgm-site",
   "private": true,
   "scripts": {
-    "dev": "wrangler pages dev public",
+    "dev": "wrangler pages dev public --port 8788 --ip 127.0.0.1",
+    "dev:remote": "wrangler pages dev public --remote",
     "deploy": "wrangler pages deploy public",
     "db:init": "wrangler d1 execute rgm_db --file=./schema.sql",
     "db:init:remote": "wrangler d1 execute rgm_db --remote --file=./schema.sql",
@@ -10,6 +11,6 @@
     "db:migrate:remote": "wrangler d1 execute rgm_db --remote --file=./migration_dates.sql -y"
   },
   "devDependencies": {
-    "wrangler": "^3"
+    "wrangler": "^3.114.17"
   }
 }

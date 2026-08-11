@@ -6,3 +6,12 @@ pages_build_output_dir = "public"
 binding = "DB"
 database_name = "rgm_db"
 database_id = "f43700cb-6f18-4818-8777-cd7000295487"
+
+[ai]
+binding = "AI"
+
+[vars]
+PAYCHANGU_PUBLIC_KEY = "PUB-LIVE-VbwEYqIPZ0Lmu34aJC3ZXAyTEtPs6KTS"
+PAYPAL_DONATE_URL = "https://www.paypal.com/donate"
+
+

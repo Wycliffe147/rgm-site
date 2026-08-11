@@ -5,8 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Revealed Gospel Ministries. Crusades, Discipleship, Malawi</title>
 <link rel="stylesheet" href="styles.css">
+
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.png">
 </head>
 <body class="home-page">
+<div id="wrapper"></div>
 
 <header>
   <nav class="wrap">
@@ -17,8 +22,10 @@
         <div class="nav-dropdown">
           <button class="nav-drop-btn">About <span class="drop-arrow">▾</span></button>
           <div class="drop-menu">
-            <a href="#about">About Us</a>
-            <a href="#mission">Mission</a>
+            <a href="about.html">About Us</a>
+            <a href="about.html#history">Our History</a>
+            <a href="about.html#trustees">Board of Trustees</a>
+            <a href="about.html#partners">Our Partners</a>
           </div>
         </div>
         <div class="nav-dropdown">
@@ -29,12 +36,41 @@
             <a href="testimonies.html">Testimonies</a>
             <a href="excellency.html">Excellency</a>
             <a href="sermons.html">Sermons</a>
+            <a href="crossover.html">Annual Crossover</a>
           </div>
         </div>
-        <a href="#contact">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Spiritual Support <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="support.html">Spiritual Support Hub</a>
+            <a href="support.html#pastor">Talk to a Pastor</a>
+            <a href="support.html#prayer">Submit Prayer Request</a>
+            <a href="support.html#counsel">Live Chat</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Partner <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="partner.html">Join the Mission</a>
+            <a href="partner.html#register">Register to Help</a>
+            <a href="partner.html#testimonies">Partner Testimonies</a>
+            <a href="partner.html#share">Share Your Experience</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Discussions <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="discussions.html">All Discussions</a>
+            <a href="discussions.html?category=bible-study">Bible Study</a>
+            <a href="discussions.html?category=prayer">Prayer Focus</a>
+            <a href="discussions.html?category=testimony">Testimonies</a>
+            <a href="discussions.html?category=general">General</a>
+          </div>
+        </div>
+        <a href="contact.html">Contact</a>
       </div>
       <div class="nav-cta">
-        <a href="#give" class="btn btn-primary">Give</a>
+        <a href="give.html" class="btn btn-primary">Give</a>
       </div>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -87,26 +123,43 @@
 <section id="mission" class="dark">
   <div class="wrap">
     <div class="section-head reveal">
+      <div class="eyebrow">Vision &amp; Mission</div>
+      <h2>Why we exist.</h2>
+    </div>
+    <div class="vm-grid reveal">
+      <div class="vm-card">
+        <span class="vm-label">Vision</span>
+        <p>To see every community transformed by the Gospel of Jesus Christ through evangelism, soul winning, and disciple-making, resulting in healthy, Christ-centred churches across Malawi and beyond.</p>
+      </div>
+      <div class="vm-card">
+        <span class="vm-label">Mission</span>
+        <p>To proclaim the Gospel through open-air crusades and community outreach, lead people to faith in Jesus Christ, and partner with local churches to disciple and equip believers to become mature followers of Christ who make disciples.</p>
+      </div>
+    </div>
+    <p class="motto reveal">"Reaching the Lost. Winning Souls. Making Disciples."</p>
+
+    <div class="section-head reveal" style="margin-top:72px;">
       <div class="eyebrow">How We Work</div>
-      <h2>Three commitments, one gospel.</h2>
+      <h2>Core Commitments</h2>
     </div>
     <div class="pillars reveal">
       <div class="pillar">
         <span class="num">01</span>
         <h3>Evangelism</h3>
-        <p>Open air crusades and outreach events designed to reach the lost across Malawi.</p>
+        <p>We are committed to proclaiming the Gospel through open-air crusades, community outreach, and other evangelistic initiatives that reach the lost with the message of Jesus Christ.</p>
       </div>
       <div class="pillar">
         <span class="num">02</span>
         <h3>Soul Winning</h3>
-        <p>Every crusade is an invitation to respond to the gospel, clearly presented and prayerfully followed up.</p>
+        <p>We are committed to clearly presenting the Gospel, inviting people to respond in faith, and ensuring that every new believer receives prayer, care, and follow-up.</p>
       </div>
       <div class="pillar">
         <span class="num">03</span>
         <h3>Discipleship</h3>
-        <p>In partnership with local churches and Life Ministries Malawi, new believers are trained and grounded in the faith.</p>
+        <p>We are committed to partnering with local churches to establish new believers in their faith through biblical teaching, mentoring, and disciple-making, equipping them to become mature disciples who multiply others.</p>
       </div>
     </div>
+    <p class="scripture-cite reveal">"Go therefore and make disciples of all nations..." - Matthew 28:19-20</p>
   </div>
 </section>
 
@@ -192,23 +245,33 @@
         <a href="https://www.stewardship.org.uk/partners/20453789" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:6px;">Give on Stewardship →</a>
       </div>
       <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px; margin-top:14px;">
+        <h4>Give via PayPal (International)</h4>
+        <p style="margin:0;">International donors outside Malawi/UK can give securely in USD, EUR, or other currencies using a credit card or PayPal account.</p>
+        <div id="paypal-container-B3HP9R34J74W2" style="margin-top:10px; width:100%; min-height:50px;"></div>
+      </div>
+      <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px; margin-top:14px;">
         <h4>Bank Transfer</h4>
         <p style="margin:0;">GBP account: 1014382557. SWIFT code: NBMAMWMW. National Bank of Malawi</p>
         <p style="margin:0;">Local MWK account: 1008907157. National Bank of Malawi</p>
       </div>
     </div>
     <div class="give-panel reveal">
-      <h3 style="margin-bottom:8px;">Give Now</h3>
+      <h3 style="margin-bottom:6px;">Give via Mobile Money &amp; Cards</h3>
+      <p style="font-size:0.85rem; opacity:0.8; margin-bottom:16px; line-height:1.4;">For local donations in Malawi. Pay securely using <strong>Airtel Money</strong>, <strong>TNM Mpamba</strong>, <strong>Visa/Mastercard</strong>, or <strong>Bank Transfer</strong>.</p>
       <div class="amt-row">
-        <button class="amt active">K50,000</button>
-        <button class="amt">K100,000</button>
-        <button class="amt">K500,000</button>
-        <button class="amt">Other</button>
+        <button class="amt active" data-value="50000">K50,000</button>
+        <button class="amt" data-value="100000">K100,000</button>
+        <button class="amt" data-value="500000">K500,000</button>
+        <button class="amt" data-value="other">Other</button>
       </div>
-      <label>Full Name</label>
-      <input type="text" placeholder="Your name" style="margin-bottom:16px;">
-      <label>Email or Phone</label>
-      <input type="text" placeholder="For receipt" style="margin-bottom:24px;">
+      <div id="giveCustomAmtContainer" style="display:none; margin-bottom:16px;">
+        <label for="giveCustomAmt">Custom Amount (MWK)</label>
+        <input type="number" id="giveCustomAmt" placeholder="Enter amount in MWK" min="1" style="width:100%; padding:10px; border-radius:4px; border:1px solid var(--line); background:rgba(255,255,255,0.04); color:#fff;">
+      </div>
+      <label for="giveName">Full Name</label>
+      <input type="text" id="giveName" placeholder="Your name" style="margin-bottom:16px;">
+      <label for="giveEmail">Email or Phone</label>
+      <input type="text" id="giveEmail" placeholder="For receipt" style="margin-bottom:24px;">
       <button class="btn btn-primary" data-action="give" style="width:100%; justify-content:center;">Continue to Payment</button>
     </div>
   </div>
@@ -224,12 +287,16 @@
       <div>
         <h4>Explore</h4>
         <ul>
-          <li><a href="#about">About</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="crusades.html">Crusades</a></li>
           <li><a href="#charity">Charity Works</a></li>
           <li><a href="testimonies.html">Testimonies</a></li>
           <li><a href="#excellency">Excellency</a></li>
           <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="support.html">Spiritual Support</a></li>
+          <li><a href="partner.html">Partner with Us</a></li>
+          <li><a href="discussions.html">Discussions</a></li>
+          <li><a href="crossover.html">Annual Crossover</a></li>
           <li><a href="#give">Give</a></li>
         </ul>
       </div>
@@ -238,22 +305,32 @@
         <ul>
           <li>Mzuzu, Malawi</li>
           <li>Always open</li>
-          <li>+265 881 65 07 53</li><li>+265 997 17 38 15</li>
-          <li>revealedgospelministry@gmail.com</li>
+          <li><a href="https://wa.me/265881650753" target="_blank" rel="noopener">WhatsApp: +265 881 65 07 53</a></li>
+          <li><a href="tel:+265997173815">Call: +265 997 17 38 15</a></li>
+          <li><a href="mailto:revealedgospelministry@gmail.com">revealedgospelministry@gmail.com</a></li>
         </ul>
       </div>
       <div>
         <h4>Follow</h4>
         <ul>
           <li><a href="https://www.facebook.com/profile.php?id=100083659636556" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://web.facebook.com/messages/t/100083659636556/" target="_blank" rel="noopener">Messenger</a></li>
           <li><a href="https://www.youtube.com/@alickmalcom4220" target="_blank" rel="noopener">YouTube</a></li>
         </ul>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <p style="opacity:0.75; font-size:0.85rem; margin-bottom:12px; line-height:1.5;">Subscribe for updates on our crusades, testimonies, and newsletters.</p>
+        <form class="newsletter-form" onsubmit="submitNewsletter(event)" style="display:flex; gap:6px;">
+          <input type="email" placeholder="Your email" required style="flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--line); color:#fff; padding:10px; border-radius:4px; font-size:0.85rem; min-width:0;">
+          <button type="submit" class="btn btn-primary" style="padding:0 12px; font-size:0.85rem; border-radius:4px;">Join</button>
+        </form>
+        <div class="newsletter-msg" style="display:none; font-size:0.8rem; margin-top:8px;"></div>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Revealed Gospel Ministries. All rights reserved.</span>
       <span>In partnership with Life Ministries Malawi</span>
+      <span>Developed by <a href="https://wyport.vercel.app" target="_blank" rel="noopener" style="color:var(--dawn-gold);opacity:1;">Wycliffe Mwanganda</a></span>
     </div>
   </div>
 </footer>
@@ -267,6 +344,8 @@
   loadExcellencyStories('excellencyGrid', null, { featured: true });
 
 </script>
-<script src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://in.paychangu.com/js/popup.js"></script>
+<script src="script.js?v=1.0.1"></script>
 </body>
 </html>

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner with Us | Revealed Gospel Ministries</title>
+<meta name="description" content="Partner with Revealed Gospel Ministries through prayer, volunteering, or church collaboration. Join our evangelistic mission across Malawi and beyond.">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* =========================================
+     PARTNER PAGE CUSTOM STYLES
+     ========================================= */
+
+  /* Impact stats strip */
+  .partner-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .partner-stats .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .partner-stats .stat b {
+    font-family: var(--display);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--dawn-gold);
+    line-height: 1;
+  }
+  .partner-stats .stat span {
+    font-size: 0.85rem;
+    color: rgba(247,243,234,0.65);
+    letter-spacing: 0.04em;
+  }
+
+  /* Partner type card grid */
+  .partner-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 40px;
+  }
+  .partner-card-item {
+    background: #fff;
+    border: 1px solid var(--line-dark);
+    border-radius: 10px;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 4px 20px rgba(14,28,59,0.05);
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .partner-card-item:hover {
+    box-shadow: 0 12px 40px rgba(14,28,59,0.12);
+    transform: translateY(-4px);
+  }
+  .partner-card-icon {
+    font-size: 2.4rem;
+    line-height: 1;
+  }
+  .partner-card-item h3 {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin: 0;
+  }
+  .partner-card-item p {
+    color: #5a5f70;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin: 0;
+    flex: 1;
+  }
+  .partner-card-cta {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 2px solid var(--dawn-gold);
+    border-radius: 5px;
+    color: var(--dawn-gold);
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.2s, color 0.2s;
+    align-self: flex-start;
+  }
+  .partner-card-cta:hover {
+    background: var(--dawn-gold);
+    color: var(--ink-deep);
+  }
+
+  /* Scripture quote block */
+  .scripture-block {
+    margin-top: 32px;
+    padding: 24px 32px;
+    background: rgba(255,255,255,0.04);
+    border-left: 4px solid var(--dawn-gold);
+    border-radius: 0 6px 6px 0;
+    max-width: 680px;
+  }
+  .scripture-block em {
+    font-style: italic;
+    color: rgba(247,243,234,0.9);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .scripture-ref {
+    display: block;
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--dawn-gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* Registration form section */
+  .partner-form-wrap {
+    background: #131722;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 700px;
+    margin: 40px auto 0;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+  }
+  @media (max-width: 600px) {
+    .partner-form-wrap { padding: 28px 20px; }
+  }
+  .partner-form-wrap .form-group {
+    margin-bottom: 20px;
+  }
+  .partner-form-wrap label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: rgba(247,243,234,0.88);
+  }
+  .partner-form-wrap input,
+  .partner-form-wrap select,
+  .partner-form-wrap textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: #0b0e14;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+  .partner-form-wrap input:focus,
+  .partner-form-wrap select:focus,
+  .partner-form-wrap textarea:focus {
+    outline: none;
+    border-color: var(--dawn-gold);
+  }
+  .partner-form-wrap textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+  .partner-form-wrap .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .partner-form-wrap .form-row { grid-template-columns: 1fr; }
+  }
+  .form-feedback {
+    display: none;
+    font-size: 0.92rem;
+    padding: 14px 18px;
+    margin-top: 16px;
+    border-radius: 5px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  /* Testimony quote cards */
+  .testimony-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .testimony-quote-card {
+    background: #fff;
+    border: 1px solid var(--line-dark);
+    border-radius: 8px;
+    padding: 28px 24px;
+    position: relative;
+    box-shadow: 0 4px 18px rgba(14,28,59,0.05);
+    transition: box-shadow 0.25s;
+  }
+  .testimony-quote-card:hover {
+    box-shadow: 0 10px 36px rgba(14,28,59,0.11);
+  }
+  .quote-mark {
+    font-size: 4rem;
+    color: var(--dawn-gold);
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    line-height: 0.5;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .testimony-text {
+    font-size: 0.95rem;
+    color: #3a3f4f;
+    line-height: 1.7;
+    margin: 0 0 20px 0;
+  }
+  .testimony-author {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 0.9rem;
+  }
+  .testimony-role {
+    font-size: 0.82rem;
+    color: #7a7f90;
+    margin-top: 2px;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: #5a5f70;
+    font-size: 0.95rem;
+    background: #fff;
+    border: 1px dashed var(--line-dark);
+    border-radius: 8px;
+    max-width: 480px;
+    margin: 40px auto 0;
+  }
+  .empty-state .empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+
+  /* Pending notice */
+  .pending-notice {
+    background: rgba(201,162,74,0.1);
+    border: 1px solid rgba(201,162,74,0.3);
+    border-radius: 6px;
+    padding: 16px 20px;
+    color: #c9a24a;
+    font-size: 0.9rem;
+    margin-top: 16px;
+    display: none;
+  }
+</style>
+
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.png">
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><img src="logo.jpg" alt="RGM logo"> Revealed Gospel Ministries</div>
+    <div class="nav-menu" id="navMenu">
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">About <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="about.html">About Us</a>
+            <a href="about.html#history">Our History</a>
+            <a href="about.html#trustees">Board of Trustees</a>
+            <a href="about.html#partners">Our Partners</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Our Work <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="crusades.html">Crusades</a>
+            <a href="charity.html">Charity Works</a>
+            <a href="testimonies.html">Testimonies</a>
+            <a href="excellency.html">Excellency</a>
+            <a href="sermons.html">Sermons</a>
+            <a href="crossover.html">Annual Crossover</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Spiritual Support <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="support.html">Spiritual Support Hub</a>
+            <a href="support.html#pastor">Talk to a Pastor</a>
+            <a href="support.html#prayer">Submit Prayer Request</a>
+            <a href="support.html#counsel">Live Chat</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Partner <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="partner.html">Join the Mission</a>
+            <a href="partner.html#register">Register to Help</a>
+            <a href="partner.html#testimonies">Partner Testimonies</a>
+            <a href="partner.html#share">Share Your Experience</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Discussions <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="discussions.html">All Discussions</a>
+            <a href="discussions.html?category=bible-study">Bible Study</a>
+            <a href="discussions.html?category=prayer">Prayer Focus</a>
+            <a href="discussions.html?category=testimony">Testimonies</a>
+            <a href="discussions.html?category=general">General</a>
+          </div>
+        </div>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a href="give.html" class="btn btn-primary">Give</a>
+      </div>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- =============================================
+     SECTION 1: HERO
+     ============================================= -->
+<section class="hero" style="min-height: 72vh; background: radial-gradient(ellipse 130% 80% at 50% 120%, var(--royal) 0%, var(--ink) 50%, var(--ink-deep) 100%);">
+  <div class="dawn-rays"></div>
+  <div class="wrap hero-content" style="padding-top: 130px; padding-bottom: 70px;">
+    <div class="eyebrow" style="color: var(--dawn-gold);">Join the Mission</div>
+    <h1 style="font-size: clamp(2.2rem, 5vw, 3.8rem); max-width: 800px;">Partner with Revealed Gospel Ministries</h1>
+    <p class="lead" style="max-width: 680px; margin-bottom: 0;">
+      Every soul won in an open-air crusade is the result of faithful partners standing behind the mission. Your support, whether in prayer, presence, or partnership, makes the difference between a life transformed and a life untouched.
+    </p>
+
+    <div class="scripture-block">
+      <em>"How then will they call on him in whom they have not believed? And how are they to believe in him of whom they have never heard?"</em>
+      <span class="scripture-ref">- Romans 10:14</span>
+    </div>
+
+    <div class="partner-stats">
+      <div class="stat"><b data-count-to="7" data-suffix="+">0+</b><span>Crusades held</span></div>
+      <div class="stat"><b data-count-to="10" data-suffix="">0</b><span>Partner churches</span></div>
+      <div class="stat"><b data-count-to="10000" data-suffix="+">0+</b><span>Souls reached</span></div>
+      <div class="stat"><b data-count-to="4000" data-suffix="+">0+</b><span>Souls won</span></div>
+    </div>
+  </div>
+</section>
+<div class="horizon"></div>
+
+<!-- =============================================
+     SECTION 2: HOW TO PARTNER
+     ============================================= -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-left: auto; margin-right: auto; text-align: center;">
+      <div class="eyebrow" style="color: var(--dawn-gold);">Ways to Stand With Us</div>
+      <h2>There's a Place for You in This Mission</h2>
+      <p style="color: #5a5f70; margin-top: 14px; max-width: 600px; margin-left: auto; margin-right: auto;">The harvest is plentiful, but the labourers are few. Whether you pray, serve on the ground, or open your church's doors, your contribution moves mountains.</p>
+    </div>
+
+    <div class="partner-cards reveal">
+      <!-- Prayer Partner -->
+      <div class="partner-card-item">
+        <div class="partner-card-icon">🙏</div>
+        <h3>Prayer Partner</h3>
+        <p>Commit to intercede for our crusades, evangelists, and those who hear the gospel. Prayer is the engine that drives every breakthrough we've ever seen.</p>
+        <a href="#register" class="partner-card-cta">Become a Prayer Partner →</a>
+      </div>
+
+      <!-- Volunteer -->
+      <div class="partner-card-item">
+        <div class="partner-card-icon">🤝</div>
+        <h3>Volunteer</h3>
+        <p>Join us on the ground. Help with logistics, outreach teams, and crusade operations. Your hands and feet on the field make every event possible.</p>
+        <a href="#register" class="partner-card-cta">Join as a Volunteer →</a>
+      </div>
+
+      <!-- Church Partner -->
+      <div class="partner-card-item">
+        <div class="partner-card-icon">⛪</div>
+        <h3>Church Partner</h3>
+        <p>Partner as a local church to co-host, refer attendees, or provide facilities for crusades. Together we ensure every new believer finds a spiritual home.</p>
+        <a href="#register" class="partner-card-cta">Partner as a Church →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 3: REGISTRATION FORM
+     ============================================= -->
+<section class="dark" id="register">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-left: auto; margin-right: auto; text-align: center;">
+      <div class="eyebrow">Get Involved</div>
+      <h2>Register to Partner</h2>
+      <p style="margin-top: 14px; color: rgba(247,243,234,0.75); max-width: 560px; margin-left: auto; margin-right: auto;">Fill in the form below and we will reach out to connect you with the right team. No commitment is too small; every partner matters.</p>
+    </div>
+
+    <div class="partner-form-wrap reveal">
+      <form id="registerForm" onsubmit="submitRegisterForm(event)">
+        <div class="form-group">
+          <label for="regName">Full Name *</label>
+          <input type="text" id="regName" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="regEmail">Email Address</label>
+            <input type="email" id="regEmail" placeholder="name@example.com">
+          </div>
+          <div class="form-group">
+            <label for="regPhone">Phone Number</label>
+            <input type="tel" id="regPhone" placeholder="e.g. +265 881 ...">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="regType">Partnership Type *</label>
+          <select id="regType" required>
+            <option value="">Select Partnership Type</option>
+            <option value="prayer">🙏 Prayer Partner</option>
+            <option value="volunteer">🤝 Volunteer</option>
+            <option value="church">⛪ Church Partner</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 28px;">
+          <label for="regMessage">Message / How you'd like to help</label>
+          <textarea id="regMessage" placeholder="Tell us more about yourself, your church, or how you'd like to contribute..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="regSubmitBtn" style="width: 100%; justify-content: center; font-size: 1rem; padding: 14px;">Register to Partner</button>
+      </form>
+      <div class="form-feedback" id="regFeedback"></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 4: PARTNER TESTIMONIES
+     ============================================= -->
+<section id="testimonies">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-left: auto; margin-right: auto; text-align: center;">
+      <div class="eyebrow" style="color: var(--dawn-gold);">From Our Partners</div>
+      <h2>Voices from the Field</h2>
+      <p style="color: #5a5f70; margin-top: 14px; max-width: 560px; margin-left: auto; margin-right: auto;">Real stories from those who have stood alongside RGM in prayer, service, and fellowship.</p>
+    </div>
+
+    <div id="testimoniesContainer" class="reveal">
+      <!-- Loaded dynamically from /api/partner-testimony -->
+      <div style="text-align:center; padding: 48px 0; color: #7a7f90; font-size: 0.92rem;">Loading testimonies...</div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     SECTION 5: SUBMIT TESTIMONY
+     ============================================= -->
+<section class="dark" id="share">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-left: auto; margin-right: auto; text-align: center;">
+      <div class="eyebrow">Share Your Story</div>
+      <h2>Have you partnered with RGM?</h2>
+      <p style="margin-top: 14px; color: rgba(247,243,234,0.75); max-width: 580px; margin-left: auto; margin-right: auto;">Your testimony encourages others to join. Share your experience; after a brief review, it will appear on this page to inspire the next partner.</p>
+    </div>
+
+    <div class="partner-form-wrap reveal">
+      <form id="testimonyForm" onsubmit="submitTestimonyForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tstName">Your Name *</label>
+            <input type="text" id="tstName" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="tstLocation">Your Location (City/Country)</label>
+            <input type="text" id="tstLocation" placeholder="e.g. Mzuzu, Malawi">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tstRole">Your Role *</label>
+          <input type="text" id="tstRole" placeholder="e.g. Prayer Partner, Volunteer, Church Leader">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 28px;">
+          <label for="tstStory">Your Story *</label>
+          <textarea id="tstStory" style="min-height: 140px;" placeholder="Share how partnering with RGM has impacted you and your community..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="tstSubmitBtn" style="width: 100%; justify-content: center; font-size: 1rem; padding: 14px;">Submit Your Story</button>
+      </form>
+      <div class="form-feedback" id="tstFeedback"></div>
+      <div class="pending-notice" id="tstPending">
+        ✅ Thank you for sharing! Your testimony has been received and is pending review. Once approved, it will appear on this page.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Revealed Gospel Ministries</h4>
+        <p style="opacity:0.75; font-size:0.9rem; max-width:280px;">An evangelistical movement empowered to preach the gospel of salvation and reach out to the lost souls across the nations. Based in Mzuzu, Malawi.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="crusades.html">Crusades</a></li>
+          <li><a href="charity.html">Charity Works</a></li>
+          <li><a href="testimonies.html">Testimonies</a></li>
+          <li><a href="excellency.html">Excellency</a></li>
+          <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="support.html">Spiritual Support</a></li>
+          <li><a href="partner.html">Partner with Us</a></li>
+          <li><a href="discussions.html">Discussions</a></li>
+          <li><a href="crossover.html">Annual Crossover</a></li>
+          <li><a href="index.html#give">Give</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Mzuzu, Malawi</li>
+          <li>Always open</li>
+          <li><a href="https://wa.me/265881650753" target="_blank" rel="noopener">WhatsApp: +265 881 65 07 53</a></li>
+          <li><a href="tel:+265997173815">Call: +265 997 17 38 15</a></li>
+          <li><a href="mailto:revealedgospelministry@gmail.com">revealedgospelministry@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="https://www.facebook.com/profile.php?id=100083659636556" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.youtube.com/@alickmalcom4220" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <p style="opacity:0.75; font-size:0.85rem; margin-bottom:12px; line-height:1.5;">Subscribe for updates on our crusades, testimonies, and newsletters.</p>
+        <form class="newsletter-form" onsubmit="submitNewsletter(event)" style="display:flex; gap:6px;">
+          <input type="email" placeholder="Your email" required style="flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--line); color:#fff; padding:10px; border-radius:4px; font-size:0.85rem; min-width:0;">
+          <button type="submit" class="btn btn-primary" style="padding:0 12px; font-size:0.85rem; border-radius:4px;">Join</button>
+        </form>
+        <div class="newsletter-msg" style="display:none; font-size:0.8rem; margin-top:8px;"></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Revealed Gospel Ministries. All rights reserved.</span>
+      <span>In partnership with Life Ministries Malawi</span>
+      <span>Developed by <a href="https://wyport.vercel.app" target="_blank" rel="noopener" style="color:var(--dawn-gold);opacity:1;">Wycliffe Mwanganda</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+<script>
+  // =============================================
+  // PARTNER REGISTRATION FORM
+  // =============================================
+  async function submitRegisterForm(e) {
+    e.preventDefault();
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const phone = document.getElementById('regPhone').value.trim();
+    const partnership_type = document.getElementById('regType').value;
+    const message = document.getElementById('regMessage').value.trim();
+    const btn = document.getElementById('regSubmitBtn');
+    const feedback = document.getElementById('regFeedback');
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+    feedback.style.display = 'none';
+
+    try {
+      const res = await fetch('/api/partner-register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, partnership_type, message })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Submission failed');
+
+      feedback.textContent = '🎉 Thank you for registering! Our team will be in touch shortly to connect you with the right opportunity.';
+      feedback.style.background = 'rgba(76, 175, 80, 0.1)';
+      feedback.style.border = '1px solid rgba(76, 175, 80, 0.25)';
+      feedback.style.color = '#81c784';
+      feedback.style.display = 'block';
+      document.getElementById('registerForm').reset();
+    } catch (err) {
+      feedback.textContent = 'Error: ' + err.message;
+      feedback.style.background = 'rgba(244, 67, 54, 0.1)';
+      feedback.style.border = '1px solid rgba(244, 67, 54, 0.25)';
+      feedback.style.color = '#e57373';
+      feedback.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Register to Partner';
+    }
+  }
+
+  // =============================================
+  // LOAD TESTIMONIES (paginated)
+  // =============================================
+  const TESTIMONY_LIMIT = 9;
+  let testimonyOffset = 0;
+  let testimonyGrid = null;
+
+  async function loadTestimonies(append = false) {
+    const container = document.getElementById('testimoniesContainer');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    if (loadMoreBtn) {
+      loadMoreBtn.disabled = true;
+      loadMoreBtn.textContent = 'Loading...';
+    }
+
+    try {
+      const res = await fetch(`/api/partner-testimony?limit=${TESTIMONY_LIMIT}&offset=${testimonyOffset}`);
+      if (!res.ok) throw new Error('Failed to load');
+      const { items, hasMore } = await res.json();
+
+      if (!append && (!items || items.length === 0)) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">🌱</div>
+            <p><strong>Be the first to share your partnership story!</strong></p>
+            <p style="margin-top: 8px; font-size:0.9rem;">After you partner with RGM and share your experience, it will appear here to inspire others.</p>
+            <a href="#share" class="partner-card-cta" style="margin-top: 16px; display:inline-block;">Share Your Story &rarr;</a>
+          </div>
+        `;
+        return;
+      }
+
+      // First load: create grid
+      if (!append) {
+        container.innerHTML = '';
+        testimonyGrid = document.createElement('div');
+        testimonyGrid.className = 'testimony-grid';
+        container.appendChild(testimonyGrid);
+      }
+
+      // Append cards
+      items.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'testimony-quote-card';
+        card.innerHTML = `
+          <span class="quote-mark">“</span>
+          <p class="testimony-text">${escapeHTML(t.testimony)}</p>
+          <div>
+            <div class="testimony-author">${escapeHTML(t.name)}</div>
+            ${t.role ? `<div class="testimony-role">${escapeHTML(t.role)}${t.location ? ' &middot; ' + escapeHTML(t.location) : ''}</div>` : (t.location ? `<div class="testimony-role">${escapeHTML(t.location)}</div>` : '')}
+          </div>
+        `;
+        testimonyGrid.appendChild(card);
+      });
+
+      testimonyOffset += items.length;
+
+      // Show/hide Load More button
+      if (hasMore) {
+        if (!loadMoreBtn) {
+          const btn = document.createElement('button');
+          btn.id = 'loadMoreBtn';
+          btn.className = 'btn btn-outline-gold';
+          btn.style.cssText = 'display:block; margin: 40px auto 0; padding: 14px 40px; border: 2px solid var(--dawn-gold); color: var(--dawn-gold); background: transparent; border-radius: 5px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: background 0.2s, color 0.2s;';
+          btn.textContent = 'Load More Stories';
+          btn.onmouseenter = () => { btn.style.background = 'var(--dawn-gold)'; btn.style.color = 'var(--ink-deep)'; };
+          btn.onmouseleave = () => { btn.style.background = 'transparent'; btn.style.color = 'var(--dawn-gold)'; };
+          btn.onclick = () => loadTestimonies(true);
+          container.appendChild(btn);
+        } else {
+          loadMoreBtn.disabled = false;
+          loadMoreBtn.textContent = 'Load More Stories';
+        }
+      } else if (loadMoreBtn) {
+        loadMoreBtn.remove();
+      }
+
+    } catch (err) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><p>Could not load testimonies. Please try again later.</p></div>`;
+    }
+  }
+
+  // =============================================
+  // SUBMIT TESTIMONY FORM
+  // =============================================
+  async function submitTestimonyForm(e) {
+    e.preventDefault();
+    const name = document.getElementById('tstName').value.trim();
+    const location = document.getElementById('tstLocation').value.trim();
+    const role = document.getElementById('tstRole').value.trim();
+    const testimony = document.getElementById('tstStory').value.trim();
+    const btn = document.getElementById('tstSubmitBtn');
+    const feedback = document.getElementById('tstFeedback');
+    const pending = document.getElementById('tstPending');
+
+    if (!role) {
+      feedback.textContent = 'Please enter your role (e.g. Prayer Partner, Volunteer).';
+      feedback.style.background = 'rgba(244,67,54,0.1)';
+      feedback.style.border = '1px solid rgba(244,67,54,0.25)';
+      feedback.style.color = '#e57373';
+      feedback.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+    feedback.style.display = 'none';
+    pending.style.display = 'none';
+
+    try {
+      const res = await fetch('/api/partner-testimony', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, location, role, testimony })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Submission failed');
+
+      document.getElementById('testimonyForm').style.display = 'none';
+      pending.style.display = 'block';
+    } catch (err) {
+      feedback.textContent = 'Error: ' + err.message;
+      feedback.style.background = 'rgba(244, 67, 54, 0.1)';
+      feedback.style.border = '1px solid rgba(244, 67, 54, 0.25)';
+      feedback.style.color = '#e57373';
+      feedback.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Submit Your Story';
+    }
+  }
+
+  function escapeHTML(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  // Load testimonies on page load
+  loadTestimonies();
+</script>
+</body>
+</html>

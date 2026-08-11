@@ -17,8 +17,10 @@
         <div class="nav-dropdown">
           <button class="nav-drop-btn">About <span class="drop-arrow">▾</span></button>
           <div class="drop-menu">
-            <a href="index.html#about">About Us</a>
-            <a href="index.html#mission">Mission</a>
+            <a href="about.html">About Us</a>
+            <a href="about.html#history">Our History</a>
+            <a href="about.html#trustees">Board of Trustees</a>
+            <a href="about.html#partners">Our Partners</a>
           </div>
         </div>
         <div class="nav-dropdown">
@@ -60,6 +62,10 @@
       <div class="eyebrow">Lives Touched</div>
       <h2>Stories from the Field</h2>
     </div>
+    <div class="page-search-wrap" style="margin-top:-8px;">
+      <label for="charitySearch">Search</label>
+      <input class="page-search-input" type="search" id="charitySearch" placeholder="Name or location..." autocomplete="off">
+    </div>
     <div class="story-grid reveal" id="charityGrid" data-loading="Loading stories…"></div>
   </div>
 </section>
@@ -73,8 +79,19 @@
       </div>
       <p>You can become part of this mission by supporting RGM Charity Works. Your generous gift will help us continue bringing hope, restoring dignity, and sharing Christ's love with those in need.</p>
       <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px;">
-        <h4>Send Your Gift</h4>
-        <p style="margin:0;">Giving details for RGM Charity Works to be added here.</p>
+        <h4>Give via PayPal (International)</h4>
+        <p style="margin:0;">International donors can support RGM Charity Works securely in USD, EUR, or other currencies using credit card or PayPal.</p>
+        <div id="paypal-container-B3HP9R34J74W2" style="margin-top:10px; width:100%; min-height:50px;"></div>
+      </div>
+      <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px; margin-top:14px;">
+        <h4>Give via Stewardship (UK)</h4>
+        <p style="margin:0;">UK donors can give through our official Stewardship page (choose 'Charity Works' designation).</p>
+        <a href="https://www.stewardship.org.uk/partners/20453789" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:6px;">Give on Stewardship →</a>
+      </div>
+      <div class="give-option" style="flex-direction:column; align-items:flex-start; gap:10px; margin-top:14px;">
+        <h4>Bank Transfer</h4>
+        <p style="margin:0;">GBP account: 1014382557. SWIFT code: NBMAMWMW. National Bank of Malawi</p>
+        <p style="margin:0;">Local MWK account: 1008907157. National Bank of Malawi</p>
       </div>
     </div>
     <div class="give-panel reveal">
@@ -104,7 +121,7 @@
       <div>
         <h4>Explore</h4>
         <ul>
-          <li><a href="index.html#about">About</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="crusades.html">Crusades</a></li>
           <li><a href="charity.html">Charity Works</a></li>
           <li><a href="testimonies.html">Testimonies</a></li>
@@ -118,15 +135,15 @@
         <ul>
           <li>Mzuzu, Malawi</li>
           <li>Always open</li>
-          <li>+265 881 65 07 53</li><li>+265 997 17 38 15</li>
-          <li>revealedgospelministry@gmail.com</li>
+          <li><a href="https://wa.me/265881650753" target="_blank" rel="noopener">WhatsApp: +265 881 65 07 53</a></li>
+          <li><a href="tel:+265997173815">Call: +265 997 17 38 15</a></li>
+          <li><a href="mailto:revealedgospelministry@gmail.com">revealedgospelministry@gmail.com</a></li>
         </ul>
       </div>
       <div>
         <h4>Follow</h4>
         <ul>
           <li><a href="https://www.facebook.com/profile.php?id=100083659636556" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://web.facebook.com/messages/t/100083659636556/" target="_blank" rel="noopener">Messenger</a></li>
           <li><a href="https://www.youtube.com/@alickmalcom4220" target="_blank" rel="noopener">YouTube</a></li>
         </ul>
       </div>
@@ -139,7 +156,10 @@
 </footer>
 
 <script src="data.js"></script>
-<script>loadCharityStories('charityGrid');</script>
+<script>
+  loadCharityStories('charityGrid');
+  setupSearch('charitySearch', q => loadCharityStories('charityGrid', null, { search: q }));
+</script>
 <script src="script.js"></script>
 </body>
 </html>

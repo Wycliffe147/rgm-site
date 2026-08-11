@@ -4,8 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crusades. Revealed Gospel Ministries</title>
-<meta name="description" content="Browse all RGM crusades — upcoming and past evangelistic outreaches across Malawi.">
+<meta name="description" content="Browse all RGM crusades: upcoming and past evangelistic outreaches across Malawi.">
 <link rel="stylesheet" href="styles.css">
+
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.png">
 </head>
 <body>
 
@@ -18,8 +22,10 @@
         <div class="nav-dropdown">
           <button class="nav-drop-btn">About <span class="drop-arrow">▾</span></button>
           <div class="drop-menu">
-            <a href="index.html#about">About Us</a>
-            <a href="index.html#mission">Mission</a>
+            <a href="about.html">About Us</a>
+            <a href="about.html#history">Our History</a>
+            <a href="about.html#trustees">Board of Trustees</a>
+            <a href="about.html#partners">Our Partners</a>
           </div>
         </div>
         <div class="nav-dropdown">
@@ -30,12 +36,41 @@
             <a href="testimonies.html">Testimonies</a>
             <a href="excellency.html">Excellency</a>
             <a href="sermons.html">Sermons</a>
+            <a href="crossover.html">Annual Crossover</a>
           </div>
         </div>
-        <a href="index.html#contact">Contact</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Spiritual Support <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="support.html">Spiritual Support Hub</a>
+            <a href="support.html#pastor">Talk to a Pastor</a>
+            <a href="support.html#prayer">Submit Prayer Request</a>
+            <a href="support.html#counsel">Live Chat</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Partner <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="partner.html">Join the Mission</a>
+            <a href="partner.html#register">Register to Help</a>
+            <a href="partner.html#testimonies">Partner Testimonies</a>
+            <a href="partner.html#share">Share Your Experience</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Discussions <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="discussions.html">All Discussions</a>
+            <a href="discussions.html?category=bible-study">Bible Study</a>
+            <a href="discussions.html?category=prayer">Prayer Focus</a>
+            <a href="discussions.html?category=testimony">Testimonies</a>
+            <a href="discussions.html?category=general">General</a>
+          </div>
+        </div>
+        <a href="contact.html">Contact</a>
       </div>
       <div class="nav-cta">
-        <a href="index.html#give" class="btn btn-primary">Give</a>
+        <a href="give.html" class="btn btn-primary">Give</a>
       </div>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -56,6 +91,10 @@
 
 <section>
   <div class="wrap">
+    <div class="page-search-wrap">
+      <label for="crusadesSearch">Search</label>
+      <input class="page-search-input" type="search" id="crusadesSearch" placeholder="Title or location..." autocomplete="off">
+    </div>
     <div class="crusade-grid reveal" id="crusadesGrid" data-loading="Loading crusades…"></div>
   </div>
 </section>
@@ -70,12 +109,16 @@
       <div>
         <h4>Explore</h4>
         <ul>
-          <li><a href="index.html#about">About</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="crusades.html">Crusades</a></li>
           <li><a href="charity.html">Charity Works</a></li>
           <li><a href="testimonies.html">Testimonies</a></li>
           <li><a href="excellency.html">Excellency</a></li>
           <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="support.html">Spiritual Support</a></li>
+          <li><a href="partner.html">Partner with Us</a></li>
+          <li><a href="discussions.html">Discussions</a></li>
+          <li><a href="crossover.html">Annual Crossover</a></li>
           <li><a href="index.html#give">Give</a></li>
         </ul>
       </div>
@@ -84,28 +127,41 @@
         <ul>
           <li>Mzuzu, Malawi</li>
           <li>Always open</li>
-          <li>+265 881 65 07 53</li><li>+265 997 17 38 15</li>
-          <li>revealedgospelministry@gmail.com</li>
+          <li><a href="https://wa.me/265881650753" target="_blank" rel="noopener">WhatsApp: +265 881 65 07 53</a></li>
+          <li><a href="tel:+265997173815">Call: +265 997 17 38 15</a></li>
+          <li><a href="mailto:revealedgospelministry@gmail.com">revealedgospelministry@gmail.com</a></li>
         </ul>
       </div>
       <div>
         <h4>Follow</h4>
         <ul>
           <li><a href="https://www.facebook.com/profile.php?id=100083659636556" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://web.facebook.com/messages/t/100083659636556/" target="_blank" rel="noopener">Messenger</a></li>
           <li><a href="https://www.youtube.com/@alickmalcom4220" target="_blank" rel="noopener">YouTube</a></li>
         </ul>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <p style="opacity:0.75; font-size:0.85rem; margin-bottom:12px; line-height:1.5;">Subscribe for updates on our crusades, testimonies, and newsletters.</p>
+        <form class="newsletter-form" onsubmit="submitNewsletter(event)" style="display:flex; gap:6px;">
+          <input type="email" placeholder="Your email" required style="flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--line); color:#fff; padding:10px; border-radius:4px; font-size:0.85rem; min-width:0;">
+          <button type="submit" class="btn btn-primary" style="padding:0 12px; font-size:0.85rem; border-radius:4px;">Join</button>
+        </form>
+        <div class="newsletter-msg" style="display:none; font-size:0.8rem; margin-top:8px;"></div>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Revealed Gospel Ministries. All rights reserved.</span>
       <span>In partnership with Life Ministries Malawi</span>
+      <span>Developed by <a href="https://wyport.vercel.app" target="_blank" rel="noopener" style="color:var(--dawn-gold);opacity:1;">Wycliffe Mwanganda</a></span>
     </div>
   </div>
 </footer>
 
 <script src="data.js"></script>
-<script>loadCrusades('crusadesGrid');</script>
+<script>
+  loadCrusades('crusadesGrid');
+  setupSearch('crusadesSearch', q => loadCrusades('crusadesGrid', null, { search: q }));
+</script>
 <script src="script.js"></script>
 </body>
 </html>

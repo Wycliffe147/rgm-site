@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /converts-portal/
+
+Sitemap: https://rgmmalawi.org/sitemap.xml

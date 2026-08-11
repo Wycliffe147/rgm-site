@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Discussions | Revealed Gospel Ministries</title>
+<meta name="description" content="Join our community discussions, share bible study insights, submit prayers, and fellowship online.">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .category-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+  .cat-pill { padding: 8px 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: rgba(247,243,234,0.8); font-size: 0.85rem; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+  .cat-pill.active, .cat-pill:hover { background: var(--dawn-gold); color: var(--ink-deep); border-color: var(--dawn-gold); font-weight: 600; }
+
+  .topic-card { background: #fff; border: 1px solid var(--line-dark); border-radius: 10px; padding: 24px; cursor: pointer; transition: box-shadow 0.2s, border-color 0.2s; margin-bottom: 16px; text-align: left; }
+  .topic-card:hover { box-shadow: 0 6px 24px rgba(14,28,59,0.08); border-color: var(--dawn-gold); }
+  .topic-card.pinned { border-left: 4px solid var(--dawn-gold); }
+  .topic-card.open { border-color: var(--dawn-gold); box-shadow: 0 6px 24px rgba(14,28,59,0.1); }
+
+  .cat-tag { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 10px; border-radius: 12px; margin-bottom: 10px; }
+  .cat-tag.bible-study { background: rgba(33,150,243,0.12); color: #1976d2; }
+  .cat-tag.prayer { background: rgba(201,162,74,0.15); color: #9a7c2a; }
+  .cat-tag.testimony { background: rgba(76,175,80,0.12); color: #388e3c; }
+  .cat-tag.general { background: rgba(120,120,120,0.1); color: #666; }
+
+  .topic-title { font-family: var(--display); font-size: 1.3rem; margin: 0 0 8px; color: var(--ink); }
+  .topic-body-snippet { color: #5a5f70; font-size: 0.95rem; line-height: 1.5; margin: 0; }
+  
+  .topic-meta { display: flex; gap: 16px; font-size: 0.8rem; opacity: 0.6; margin-top: 12px; flex-wrap: wrap; color: var(--ink); }
+  .topic-detail { border-top: 1px solid var(--line-dark); margin-top: 20px; padding-top: 20px; display: none; }
+  .topic-detail.open { display: block; }
+  
+  .reaction-bar { display: flex; gap: 10px; margin: 16px 0; flex-wrap: wrap; }
+  .react-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 20px; border: 1px solid var(--line-dark); background: #f8f7f4; cursor: pointer; font-size: 0.88rem; font-family: inherit; transition: all 0.18s; color: var(--ink); }
+  .react-btn:hover, .react-btn.reacted { background: var(--dawn-gold); border-color: var(--dawn-gold); color: var(--ink-deep); font-weight: 600; }
+
+  .replies-section { margin-top: 24px; border-top: 1px solid var(--line-dark); padding-top: 20px; }
+  .replies-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+  .reply-item { background: #f8f7f4; border-radius: 8px; padding: 14px 16px; border: 1px solid var(--line-dark); text-align: left; }
+  .reply-header { display: flex; align-items: center; justify-content: space-between; }
+  .reply-name { font-weight: 700; font-size: 0.9rem; color: var(--ink); }
+  .reply-date { font-size: 0.78rem; opacity: 0.5; }
+  .reply-text { margin: 6px 0 0; font-size: 0.92rem; line-height: 1.5; color: #3a3f50; }
+
+  .reply-form { margin-top: 24px; border-top: 1px solid var(--line-dark); padding-top: 20px; text-align: left; }
+  .reply-form h4 { margin: 0 0 14px; font-size: 1rem; color: var(--ink); font-family: var(--display); }
+
+  .topics-grid { display: flex; flex-direction: column; gap: 16px; }
+  .empty-discussions { text-align: center; padding: 64px 24px; opacity: 0.6; }
+  .empty-discussions .empty-icon { font-size: 3rem; margin-bottom: 16px; }
+  
+  .topic-badge-pinned { background: var(--dawn-gold); color: var(--ink-deep); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 4px; vertical-align: middle; margin-left: 8px; display: inline-block; }
+  .reply-form input,
+  .reply-form textarea {
+    background: #f4f3f0;
+    border: 1px solid #d0cfc9;
+    border-radius: 4px;
+    color: #1a1e2e;
+    font-family: inherit;
+    font-size: 0.92rem;
+    padding: 10px 12px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.18s;
+  }
+  .reply-form input:focus,
+  .reply-form textarea:focus {
+    border-color: var(--dawn-gold);
+    background: #fff;
+  }
+  .reply-form textarea { resize: vertical; }
+</style>
+
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.png">
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><img src="logo.jpg" alt="RGM logo"> Revealed Gospel Ministries</div>
+    <div class="nav-menu" id="navMenu">
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn" id="aboutDropdownBtn">About <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu" aria-label="About menu">
+            <a href="about.html">About Us</a>
+            <a href="about.html#history">Our History</a>
+            <a href="about.html#trustees">Board of Trustees</a>
+            <a href="about.html#partners">Our Partners</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Our Work <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="crusades.html">Crusades</a>
+            <a href="charity.html">Charity Works</a>
+            <a href="testimonies.html">Testimonies</a>
+            <a href="excellency.html">Excellency</a>
+            <a href="sermons.html">Sermons</a>
+            <a href="crossover.html">Annual Crossover</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Spiritual Support <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="support.html">Spiritual Support Hub</a>
+            <a href="support.html#pastor">Talk to a Pastor</a>
+            <a href="support.html#prayer">Submit Prayer Request</a>
+            <a href="support.html#counsel">Live Chat</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Partner <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="partner.html">Join the Mission</a>
+            <a href="partner.html#register">Register to Help</a>
+            <a href="partner.html#testimonies">Partner Testimonies</a>
+            <a href="partner.html#share">Share Your Experience</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-drop-btn">Discussions <span class="drop-arrow">▾</span></button>
+          <div class="drop-menu">
+            <a href="discussions.html">All Discussions</a>
+            <a href="discussions.html?category=bible-study">Bible Study</a>
+            <a href="discussions.html?category=prayer">Prayer Focus</a>
+            <a href="discussions.html?category=testimony">Testimonies</a>
+            <a href="discussions.html?category=general">General</a>
+          </div>
+        </div>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a href="give.html" class="btn btn-primary">Give</a>
+      </div>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<section class="hero" style="min-height: 50vh; background: radial-gradient(ellipse 120% 80% at 50% 120%, var(--royal) 0%, var(--ink) 50%, var(--ink-deep) 100%);">
+  <div class="dawn-rays"></div>
+  <div class="wrap hero-content" style="padding-top: 130px; padding-bottom: 70px;">
+    <div class="eyebrow" style="color: var(--dawn-gold);">Community</div>
+    <h1 style="font-size: clamp(2.2rem, 5vw, 3.8rem);">Discussions</h1>
+    <p class="lead" style="max-width: 680px; margin-bottom: 0;">Join the conversation. Explore scripture, share testimonies, and grow together with believers from across the RGM community.</p>
+    
+    <div class="category-filters">
+      <button class="cat-pill active" id="pill-all" onclick="filterByCategory('')">All Topics</button>
+      <button class="cat-pill" id="pill-bible-study" onclick="filterByCategory('bible-study')">Bible Study</button>
+      <button class="cat-pill" id="pill-prayer" onclick="filterByCategory('prayer')">Prayer Focus</button>
+      <button class="cat-pill" id="pill-testimony" onclick="filterByCategory('testimony')">Testimonies</button>
+      <button class="cat-pill" id="pill-general" onclick="filterByCategory('general')">General</button>
+    </div>
+  </div>
+</section>
+<div class="horizon"></div>
+
+<section style="background:#fcfbf9; padding: 60px 0;">
+  <div class="wrap" style="max-width: 800px;">
+    <div id="topicsContainer" class="topics-grid">
+      <div style="text-align:center; padding: 48px 0; color: #7a7f90; font-size: 0.92rem;">Loading discussions...</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Revealed Gospel Ministries</h4>
+        <p style="opacity:0.75; font-size:0.9rem; max-width:280px;">An evangelistical movement empowered to preach the gospel of salvation and reach out to the lost souls across the nations. Based in Mzuzu, Malawi.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="crusades.html">Crusades</a></li>
+          <li><a href="charity.html">Charity Works</a></li>
+          <li><a href="testimonies.html">Testimonies</a></li>
+          <li><a href="excellency.html">Excellency</a></li>
+          <li><a href="sermons.html">Sermons</a></li>
+          <li><a href="support.html">Spiritual Support</a></li>
+          <li><a href="partner.html">Partner with Us</a></li>
+          <li><a href="discussions.html">Discussions</a></li>
+          <li><a href="crossover.html">Annual Crossover</a></li>
+          <li><a href="index.html#give">Give</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Mzuzu, Malawi</li>
+          <li>Always open</li>
+          <li><a href="https://wa.me/265881650753" target="_blank" rel="noopener">WhatsApp: +265 881 65 07 53</a></li>
+          <li><a href="tel:+265997173815">Call: +265 997 17 38 15</a></li>
+          <li><a href="mailto:revealedgospelministry@gmail.com">revealedgospelministry@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="https://www.facebook.com/profile.php?id=100083659636556" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.youtube.com/@alickmalcom4220" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <p style="opacity:0.75; font-size:0.85rem; margin-bottom:12px; line-height:1.5;">Subscribe for updates on our crusades, testimonies, and newsletters.</p>
+        <form class="newsletter-form" onsubmit="submitNewsletter(event)" style="display:flex; gap:6px;">
+          <input type="email" placeholder="Your email" required style="flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--line); color:#fff; padding:10px; border-radius:4px; font-size:0.85rem; min-width:0;">
+          <button type="submit" class="btn btn-primary" style="padding:0 12px; font-size:0.85rem; border-radius:4px;">Join</button>
+        </form>
+        <div class="newsletter-msg" style="display:none; font-size:0.8rem; margin-top:8px;"></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Revealed Gospel Ministries. All rights reserved.</span>
+      <span>In partnership with Life Ministries Malawi</span>
+      <span>Developed by <a href="https://wyport.vercel.app" target="_blank" rel="noopener" style="color:var(--dawn-gold);opacity:1;">Wycliffe Mwanganda</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+<script>
+  let currentCategory = '';
+  
+  function initDiscussions() {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get('category') || '';
+    filterByCategory(cat, false);
+  }
+
+  function filterByCategory(cat, updateUrl = true) {
+    currentCategory = cat;
+    document.querySelectorAll('.cat-pill').forEach(btn => btn.classList.remove('active'));
+    
+    const activeId = cat ? `pill-${cat}` : 'pill-all';
+    const activePill = document.getElementById(activeId);
+    if (activePill) activePill.classList.add('active');
+
+    if (updateUrl) {
+      const newUrl = cat ? `${window.location.pathname}?category=${cat}` : window.location.pathname;
+      window.history.pushState({ category: cat }, '', newUrl);
+    }
+
+    loadTopics(cat);
+  }
+
+  async function loadTopics(cat = '') {
+    const container = document.getElementById('topicsContainer');
+    container.innerHTML = '<div style="text-align:center; padding: 48px 0; color: #7a7f90; font-size: 0.92rem;">Loading discussions...</div>';
+    
+    try {
+      const url = cat ? `/api/discussions?category=${cat}` : '/api/discussions';
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Failed to load discussions');
+      const topics = await res.json();
+      renderTopics(topics);
+    } catch (err) {
+      container.innerHTML = `<div class="empty-discussions"><div class="empty-icon">⚠️</div><p>Failed to load discussions. Please try again later.</p></div>`;
+    }
+  }
+
+  function renderTopics(topics) {
+    const container = document.getElementById('topicsContainer');
+    if (!topics || topics.length === 0) {
+      container.innerHTML = `
+        <div class="empty-discussions">
+          <div class="empty-icon">💬</div>
+          <p><strong>No discussions in this category yet.</strong></p>
+          <p style="font-size:0.9rem; margin-top:8px;">Check back later or visit another category to join the conversation.</p>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = '';
+    const catLabels = { 'bible-study': 'Bible Study', 'prayer': 'Prayer Focus', 'testimony': 'Testimony', 'general': 'General' };
+
+    topics.forEach(t => {
+      const card = document.createElement('div');
+      card.className = `topic-card${t.pinned ? ' pinned' : ''}`;
+      card.id = `topic-card-${t.id}`;
+      card.onclick = (e) => {
+        // Prevent toggling if clicking inputs or buttons inside the card
+        if (e.target.closest('.topic-detail') || e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON') {
+          return;
+        }
+        toggleTopic(t.id);
+      };
+
+      card.innerHTML = `
+        <span class="cat-tag ${t.category}">${catLabels[t.category] || t.category}</span>
+        ${t.pinned ? '<span class="topic-badge-pinned">Pinned</span>' : ''}
+        <h3 class="topic-title">${escapeHTML(t.title)}</h3>
+        <p class="topic-body-snippet" id="snippet-${t.id}">${escapeHTML(truncate(t.body, 120))}</p>
+        <div class="topic-meta">
+          <span>By <strong>${escapeHTML(t.created_by)}</strong></span>
+          <span>&middot;</span>
+          <span>${timeAgo(t.created_at)}</span>
+          <span>&middot;</span>
+          <span>💬 ${t.reply_count || 0} replies</span>
+        </div>
+        
+        <div class="topic-detail" id="detail-${t.id}">
+          <div style="font-size:1.05rem; line-height:1.6; color:#2c3140; white-space:pre-wrap; margin-bottom:24px;">${escapeHTML(t.body)}</div>
+          
+          <div class="reaction-bar">
+            <button class="react-btn" onclick="postReaction(${t.id}, 'pray', this)" id="react-pray-${t.id}">
+              🙏 Pray <span class="count">${t.react_pray || 0}</span>
+            </button>
+            <button class="react-btn" onclick="postReaction(${t.id}, 'heart', this)" id="react-heart-${t.id}">
+              ❤️ Love <span class="count">${t.react_heart || 0}</span>
+            </button>
+            <button class="react-btn" onclick="postReaction(${t.id}, 'amen', this)" id="react-amen-${t.id}">
+              🙌 Amen <span class="count">${t.react_amen || 0}</span>
+            </button>
+          </div>
+
+          <div class="replies-section">
+            <h4 style="margin:0 0 12px; font-size:1.1rem; color:var(--ink); font-family:var(--display);">Replies</h4>
+            <div class="replies-list" id="replies-list-${t.id}">
+              <div style="text-align:center; padding:16px 0; opacity:0.5; font-size:0.9rem;">Loading replies...</div>
+            </div>
+            
+            <div class="reply-form">
+              <h4>Leave a Reply</h4>
+              <form onsubmit="postReply(event, ${t.id})">
+                <div class="form-group" style="margin-bottom:12px;">
+                  <label style="font-weight:600; font-size:0.85rem; display:block; margin-bottom:6px; color:var(--ink);">Your Name *</label>
+                  <input type="text" required class="reply-input-name" placeholder="Enter your name">
+                </div>
+                <div class="form-group" style="margin-bottom:16px;">
+                  <label style="font-weight:600; font-size:0.85rem; display:block; margin-bottom:6px; color:var(--ink);">Your Message *</label>
+                  <textarea required class="reply-input-msg" rows="3" placeholder="Share your thoughts..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Submit Reply</button>
+              </form>
+              <div class="reply-feedback" style="display:none; font-size:0.85rem; margin-top:8px; color:#81c784;"></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+  }
+
+  function toggleTopic(id) {
+    const detail = document.getElementById(`detail-${id}`);
+    const card = document.getElementById(`topic-card-${id}`);
+    const snippet = document.getElementById(`snippet-${id}`);
+    
+    const isOpen = detail.classList.contains('open');
+
+    // Close all open topics first
+    document.querySelectorAll('.topic-detail').forEach(d => {
+      d.classList.remove('open');
+      const tid = d.id.split('-')[1];
+      const tcard = document.getElementById(`topic-card-${tid}`);
+      if (tcard) tcard.classList.remove('open');
+      const tsnippet = document.getElementById(`snippet-${tid}`);
+      if (tsnippet) tsnippet.style.display = 'block';
+    });
+
+    if (!isOpen) {
+      detail.classList.add('open');
+      card.classList.add('open');
+      snippet.style.display = 'none';
+      loadTopicDetail(id);
+      
+      // Smooth scroll to card
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 50);
+    }
+  }
+
+  async function loadTopicDetail(id) {
+    const listContainer = document.getElementById(`replies-list-${id}`);
+    
+    try {
+      const res = await fetch(`/api/discussions?id=${id}`);
+      if (!res.ok) throw new Error('Failed to load topic details');
+      const { topic, replies } = await res.json();
+      
+      // Update reactions
+      updateReactionBtn(id, 'pray', topic.react_pray);
+      updateReactionBtn(id, 'heart', topic.react_heart);
+      updateReactionBtn(id, 'amen', topic.react_amen);
+
+      renderReplies(replies, listContainer);
+    } catch (err) {
+      listContainer.innerHTML = '<div style="text-align:center; padding:16px 0; color:#e57373; font-size:0.9rem;">Failed to load replies.</div>';
+    }
+  }
+
+  function updateReactionBtn(topicId, emoji, count) {
+    const btn = document.getElementById(`react-${emoji}-${topicId}`);
+    if (btn) {
+      const label = emoji === 'pray' ? '🙏 Pray' : (emoji === 'heart' ? '❤️ Love' : '🙌 Amen');
+      btn.querySelector('.count').textContent = count || 0;
+    }
+  }
+
+  function renderReplies(replies, container) {
+    if (!replies || replies.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding:24px 0; opacity:0.5; font-size:0.9rem;">No replies yet. Be the first to share your thoughts!</div>';
+      return;
+    }
+
+    container.innerHTML = replies.map(r => `
+      <div class="reply-item">
+        <div class="reply-header">
+          <span class="reply-name">${escapeHTML(r.name)}</span>
+          <span class="reply-date">${timeAgo(r.created_at)}</span>
+        </div>
+        <p class="reply-text">${escapeHTML(r.message)}</p>
+      </div>
+    `).join('');
+  }
+
+  async function postReply(e, topicId) {
+    e.preventDefault();
+    const form = e.target;
+    const nameInput = form.querySelector('.reply-input-name');
+    const msgInput = form.querySelector('.reply-input-msg');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const feedback = form.nextElementSibling;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Posting...';
+    feedback.style.display = 'none';
+
+    try {
+      const res = await fetch('/api/discussion-reply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic_id: topicId,
+          name: nameInput.value.trim(),
+          message: msgInput.value.trim()
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to submit reply');
+
+      feedback.textContent = '🎉 Reply posted successfully!';
+      feedback.style.display = 'block';
+      form.reset();
+
+      // Reload replies list
+      await loadTopicDetail(topicId);
+
+      // Increment card replies count badge
+      const card = document.getElementById(`topic-card-${topicId}`);
+      if (card) {
+        const metaSpan = card.querySelector('.topic-meta span:last-child');
+        if (metaSpan) {
+          const currentCount = parseInt(metaSpan.textContent.match(/\d+/) || '0', 10);
+          metaSpan.textContent = `💬 ${currentCount + 1} replies`;
+        }
+      }
+    } catch (err) {
+      feedback.textContent = 'Error: ' + err.message;
+      feedback.style.color = '#e57373';
+      feedback.style.display = 'block';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Reply';
+    }
+  }
+
+  async function postReaction(topicId, emoji, btn) {
+    event.stopPropagation(); // prevent card toggle
+
+    try {
+      const res = await fetch('/api/discussion-react', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic_id: topicId, emoji })
+      });
+      
+      const data = await res.json();
+      if (!res.ok) throw new Error();
+
+      const countSpan = btn.querySelector('.count');
+      let currentCount = parseInt(countSpan.textContent || '0', 10);
+      
+      if (data.action === 'added') {
+        btn.classList.add('reacted');
+        countSpan.textContent = currentCount + 1;
+      } else {
+        btn.classList.remove('reacted');
+        countSpan.textContent = Math.max(0, currentCount - 1);
+      }
+    } catch (err) {
+      console.error('Failed to react:', err);
+    }
+  }
+
+  function escapeHTML(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function truncate(str, n) {
+    if (!str) return '';
+    return (str.length > n) ? str.substr(0, n - 1) + '...' : str;
+  }
+
+  function timeAgo(dateStr) {
+    if (!dateStr) return 'N/A';
+    // Fix SQLite timestamp parsing for Safari
+    const date = new Date(dateStr.replace(' ', 'T'));
+    const seconds = Math.floor((new Date() - date) / 1000);
+    if (isNaN(seconds)) return 'Recently';
+
+    let interval = Math.floor(seconds / 31536000);
+    if (interval >= 1) return interval + 'y ago';
+    interval = Math.floor(seconds / 2592000);
+    if (interval >= 1) return interval + 'mo ago';
+    interval = Math.floor(seconds / 86400);
+    if (interval >= 1) return interval + 'd ago';
+    interval = Math.floor(seconds / 3600);
+    if (interval >= 1) return interval + 'h ago';
+    interval = Math.floor(seconds / 60);
+    if (interval >= 1) return interval + 'm ago';
+    return 'Just now';
+  }
+
+  window.addEventListener('popstate', (e) => {
+    const cat = e.state ? e.state.category : '';
+    filterByCategory(cat, false);
+  });
+
+  document.addEventListener('DOMContentLoaded', initDiscussions);
+</script>
+</body>
+</html>

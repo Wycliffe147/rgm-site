@@ -11,7 +11,7 @@ wrangler.toml   → Cloudflare config
 
 ## Admin Dashboard (`/admin`)
 
-You can now manage all site content visually at `https://rgm-site.pages.dev/admin` (or `http://127.0.0.1:8788/admin` locally):
+You can now manage all site content visually at `https://rgmmalawi.org/admin` (or `http://127.0.0.1:8788/admin` locally):
 - **Add / Edit / Delete Crusades**
 - **Attach Crusade Video Highlights**
 - **Add / Edit / Delete Sermons**

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Converts Portal | Revealed Gospel Ministries</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body {
+    background: var(--ink-deep);
+    color: var(--parchment);
+    font-family: var(--body);
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 0;
+  }
+  header {
+    position: relative !important;
+    top: auto !important;
+    background: #0e121b !important;
+    border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+    z-index: 10;
+  }
+  .portal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .portal-title {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dawn-gold);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .admin-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.85rem;
+  }
+  .admin-badge {
+    background: rgba(201, 162, 74, 0.15);
+    color: var(--dawn-gold);
+    border: 1px solid rgba(201, 162, 74, 0.3);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  
+  .portal-tabs {
+    display: flex;
+    gap: 6px;
+    border-bottom: 1px solid var(--line);
+    margin-top: 24px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--parchment);
+    opacity: 0.7;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover {
+    opacity: 1;
+    color: var(--dawn-gold);
+  }
+  .tab-btn.active {
+    opacity: 1;
+    color: var(--dawn-gold);
+    border-bottom-color: var(--dawn-gold);
+    background: rgba(230, 180, 80, 0.05);
+    border-radius: 6px 6px 0 0;
+  }
+
+  .portal-container {
+    padding: 32px 0 64px;
+  }
+  
+  /* Statistics widgets */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: #141923;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  .stat-card h4 {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: rgba(247, 243, 234, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 8px 0;
+  }
+  .stat-card .val {
+    font-family: var(--display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dawn-gold);
+  }
+  
+  /* Filter bar styling */
+  .filter-bar {
+    background: #141923;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 16px;
+    align-items: end;
+  }
+  @media (max-width: 768px) {
+    .filter-bar {
+      grid-template-columns: 1fr;
+      padding: 16px;
+    }
+  }
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .filter-group label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: rgba(247, 243, 234, 0.6);
+    letter-spacing: 0.05em;
+  }
+  .filter-group input, .filter-group select {
+    background: #0b0e14;
+    border: 1px solid var(--line);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .filter-group input:focus, .filter-group select:focus {
+    outline: none;
+    border-color: var(--dawn-gold);
+  }
+
+  .action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .action-bar h2 {
+    font-family: var(--display);
+    font-size: 1.45rem;
+    color: var(--parchment);
+    margin: 0;
+  }
+
+  /* Table styling overrides */
+  .table-wrap {
+    background: #131722;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow-x: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .portal-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+  .portal-table th {
+    background: rgba(255,255,255,0.03);
+    padding: 14px 18px;
+    color: var(--dawn-gold);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--line);
+  }
+  .portal-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: middle;
+    color: rgba(247, 243, 234, 0.88);
+  }
+  .portal-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+  .portal-table a {
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+  .portal-table a:hover {
+    color: var(--dawn-gold);
+  }
+
+  /* Modal Backdrop styling */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000; padding: 20px;
+  }
+  .modal-overlay.open {
+    display: flex;
+  }
+  .modal-card {
+    background: #171c28;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    max-width: 580px; width: 100%;
+    max-height: 90vh; overflow-y: auto;
+    padding: 32px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  }
+  .modal-card h3 {
+    margin-top: 0;
+    color: var(--dawn-gold);
+    font-family: var(--display);
+    font-size: 1.4rem;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: rgba(247,243,234,0.9);
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background: #0b0e14;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+  }
+  .form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--dawn-gold);
+  }
+
+  .btn-sm { padding: 6px 12px; font-size: 0.8rem; border-radius: 4px; }
+  /* Fix: ensure outline buttons have transparent bg so text is always visible on dark surfaces */
+  .btn-outline {
+    background: transparent;
+    color: var(--parchment) !important;
+  }
+  .btn-outline:hover {
+    color: var(--dawn-gold) !important;
+  }
+  .btn-danger { background: #b83232; color: #fff; border: none; cursor: pointer; }
+  .btn-danger:hover { background: #d33838; }
+  
+  .badge {
+    padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; display: inline-block;
+  }
+  .badge-pending { background: rgba(201, 162, 74, 0.15); color: #c9a24a; border: 1px solid rgba(201, 162, 74, 0.3); }
+  .badge-contacted { background: rgba(76, 175, 80, 0.15); color: #81c784; border: 1px solid rgba(76, 175, 80, 0.3); }
+  .badge-no-answer { background: rgba(244, 67, 54, 0.15); color: #e57373; border: 1px solid rgba(244, 67, 54, 0.3); }
+  .badge-needs-visit { background: rgba(33, 150, 243, 0.15); color: #64b5f6; border: 1px solid rgba(33, 150, 243, 0.3); }
+
+  .toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: #1e2536; border: 1px solid var(--dawn-gold);
+    color: #fff; padding: 12px 24px; border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    display: none; z-index: 2000;
+    animation: fadeIn 0.2s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .export-card {
+    background: #141923;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 32px;
+    margin-bottom: 24px;
+    max-width: 600px;
+  }
+  .export-card h3 {
+    margin-top: 0; color: var(--dawn-gold); font-family: var(--display);
+  }
+
+  /* ---- Bulk Session Styles ---- */
+  .session-start-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    background: rgba(201, 162, 74, 0.07);
+    border: 1px solid rgba(201, 162, 74, 0.2);
+    border-radius: 8px;
+    padding: 16px 24px;
+    margin-bottom: 24px;
+  }
+  .session-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    background: rgba(76, 175, 80, 0.08);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-bottom: 16px;
+  }
+  .session-label {
+    display: inline-block;
+    background: rgba(76,175,80,0.2);
+    color: #81c784;
+    border: 1px solid rgba(76,175,80,0.3);
+    border-radius: 12px;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    padding: 2px 8px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .session-info { font-size: 0.88rem; }
+  .session-stats {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  .session-count {
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #81c784;
+  }
+  .quick-add-panel {
+    background: #141923;
+    border: 1px solid rgba(76,175,80,0.25);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .quick-add-row {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1.5fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+  .quick-add-row input {
+    background: #0b0e14;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .quick-add-row input:focus {
+    outline: none;
+    border-color: #81c784;
+  }
+  @media (max-width: 768px) {
+    .quick-add-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.png">
+</head>
+<body>
+
+<!-- Header Section -->
+<header>
+  <div class="wrap portal-nav">
+    <div class="portal-title">
+      <img src="../logo.jpg" alt="RGM logo" style="height:36px; width:36px; border-radius:50%;">
+      Revealed Gospel Ministries: Outreach Portal
+    </div>
+    <div class="admin-info">
+      <span id="adminGreeting">Welcome, Admin</span>
+      <span id="adminRoleBadge" class="admin-badge">Role</span>
+      <button class="btn btn-outline btn-sm" onclick="openPasswordModal()">Password</button>
+      <button class="btn btn-danger btn-sm" onclick="handleLogout()">Log Out</button>
+    </div>
+  </div>
+</header>
+
+<!-- Tab Navigation Section -->
+<div class="wrap">
+  <nav class="portal-tabs" aria-label="Portal Navigation Tabs">
+    <button class="tab-btn active" id="tab-converts" onclick="switchTab('converts')">👥 Converts follow-up</button>
+    <button class="tab-btn" id="tab-attendance" onclick="switchTab('attendance')">📋 Attendance Register</button>
+    <button class="tab-btn" id="tab-prayers" onclick="switchTab('prayers')">🙏 Prayer Requests</button>
+    <button class="tab-btn" id="tab-partners" onclick="switchTab('partners')">🤝 Partners</button>
+    <button class="tab-btn" id="tab-crossover" onclick="switchTab('crossover')">🎆 Crossover</button>
+    <button class="tab-btn" id="tab-discussions" onclick="switchTab('discussions')">💬 Discussions</button>
+    <button class="tab-btn" id="tab-subscribers" onclick="switchTab('subscribers')">📧 Subscribers</button>
+    <button class="tab-btn" id="tab-export" onclick="switchTab('export')">📥 Backups &amp; Export</button>
+    <button class="tab-btn" id="tab-users" onclick="switchTab('users')" style="display:none;">⚙️ User Accounts</button>
+  </nav>
+</div>
+
+<!-- Main Section -->
+<main class="wrap portal-container">
+  <div id="tabContent">
+    <!-- Rendered Dynamically -->
+  </div>
+</main>
+
+<!-- MODALS SECTION -->
+
+<!-- Convert Dialog Modal (Add/Edit/Log Call) -->
+<div id="convertModal" class="modal-overlay">
+  <div class="modal-card">
+    <h3 id="convertModalTitle">New Convert Record</h3>
+    <form id="convertForm" onsubmit="submitConvertForm(event)">
+      <input type="hidden" id="convertIdField">
+      
+      <div class="form-group">
+        <label for="convertNameField">Convert Full Name *</label>
+        <input type="text" id="convertNameField" placeholder="Enter full name" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="convertPhoneField">Phone Number</label>
+          <input type="tel" id="convertPhoneField" placeholder="e.g. +265 881 ...">
+        </div>
+        <div class="form-group">
+          <label for="convertChurchField">Preferred Church / Denomination</label>
+          <input type="text" id="convertChurchField" placeholder="e.g. CCAP, Assemblies of God">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="convertCrusadeField">Crusade Campaign Location</label>
+          <select id="convertCrusadeField">
+            <option value="">Select Crusade Location</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="convertStatusField">Follow-Up Status</label>
+          <select id="convertStatusField">
+            <option value="pending">Pending Engagement</option>
+            <option value="contacted">Spoken / Contacted</option>
+            <option value="no_answer">No Answer / Busy</option>
+            <option value="needs_visit">Needs Visit / Counseling</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="convertContactDateField">Last Contact Date</label>
+        <input type="date" id="convertContactDateField">
+      </div>
+
+      <div class="form-group">
+        <label for="convertNotesField">Follow-Up / Engagement Notes</label>
+        <textarea id="convertNotesField" placeholder="Record conversations, prayer requests, or follow-up details here..."></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:24px;">
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('convertModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Convert Card</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Attendance Register Dialog Modal -->
+<div id="attendanceModal" class="modal-overlay">
+  <div class="modal-card">
+    <h3 id="attendanceModalTitle">Log Attendance Register</h3>
+    <form id="attendanceForm" onsubmit="submitAttendanceForm(event)">
+      <div class="form-group">
+        <label for="attCrusadeField">Crusade Out-reach *</label>
+        <select id="attCrusadeField" required>
+          <option value="">Select Crusade</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="attDateField">Service Date *</label>
+          <input type="date" id="attDateField" required>
+        </div>
+        <div class="form-group">
+          <label for="attNameField">Service Name/Type *</label>
+          <input type="text" id="attNameField" placeholder="e.g. Morning Session, Afternoon Revival" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="attPreacherField">Preacher / Ministering Name *</label>
+          <input type="text" id="attPreacherField" placeholder="Preacher's name" required>
+        </div>
+        <div class="form-group">
+          <label for="attCountField">Total Attendance Count *</label>
+          <input type="number" id="attCountField" min="0" placeholder="Count" required>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:24px;">
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('attendanceModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Authorize &amp; Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Start Bulk Session Modal -->
+<div id="sessionModal" class="modal-overlay">
+  <div class="modal-card">
+    <h3>Start Bulk Entry Session</h3>
+    <p style="opacity:0.75; font-size:0.88rem; margin-bottom:20px;">Set the shared fields once. Only Name, Phone, and Church will be asked per person.</p>
+    <form id="sessionForm" onsubmit="startSession(event)">
+      <div class="form-group">
+        <label for="sessionCrusadeField">Crusade Campaign</label>
+        <select id="sessionCrusadeField">
+          <option value="">Select Crusade (or leave blank for general outreach)</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="sessionDateField">Service Date *</label>
+          <input type="date" id="sessionDateField" required>
+        </div>
+        <div class="form-group">
+          <label for="sessionServiceField">Service Name / Split *</label>
+          <input type="text" id="sessionServiceField" placeholder="e.g. Morning Session, Day 2 Evening" required>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:28px;">
+        <label for="sessionPreacherField">Ministering Preacher *</label>
+        <input type="text" id="sessionPreacherField" placeholder="Name of the minister preaching" required>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:12px;">
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('sessionModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Begin Session</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Close Session Confirmation Modal -->
+<div id="closeSessionModal" class="modal-overlay">
+  <div class="modal-card" style="max-width:480px;">
+    <h3>Close &amp; Save Session</h3>
+    <p id="closeSessionSummary" style="font-size:0.85rem; opacity:0.75; margin-bottom:20px;"></p>
+    <form id="closeSessionForm" onsubmit="closeSession(event)">
+      <div class="form-group" style="margin-bottom:28px;">
+        <label for="closeSessionCount">Total Service Attendance Count *</label>
+        <input type="number" id="closeSessionCount" min="0" required>
+        <p style="font-size:0.78rem; opacity:0.6; margin-top:6px;">Pre-filled with the number of converts added. Adjust if the total attendance was larger than those who came forward.</p>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:12px;">
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('closeSessionModal')">Go Back</button>
+        <button type="submit" class="btn btn-primary">Save Register &amp; End Session</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Admin User Creation Dialog Modal -->
+<div id="adminUserModal" class="modal-overlay">
+  <div class="modal-card">
+    <h3 id="adminUserTitle">Create Administrator Account</h3>
+    <form id="adminUserForm" onsubmit="submitAdminUserForm(event)">
+      <input type="hidden" id="adminUserIdField">
+      
+      <div class="form-group">
+        <label for="adminUserField">Username *</label>
+        <input type="text" id="adminUserField" placeholder="Choose username (lowercase)" required>
+      </div>
+
+      <div class="form-group">
+        <label for="adminNameField">Administrator Full Name *</label>
+        <input type="text" id="adminNameField" placeholder="e.g. Pastor Alick Nyirenda" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="adminPasswordField">Password *</label>
+          <input type="password" id="adminPasswordField" placeholder="Set password" required>
+        </div>
+        <div class="form-group">
+          <label for="adminRoleField">Portal Role *</label>
+          <select id="adminRoleField" required>
+            <option value="caller">Caller (Logs follow-ups only)</option>
+            <option value="recorder">Recorder (Logs attendance only)</option>
+            <option value="super_admin">Super Admin (Full privileges)</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:24px;">
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('adminUserModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save User Account</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Self Password Change Modal -->
+<div id="passwordChangeModal" class="modal-overlay">
+  <div class="modal-card" style="max-width: 420px;">
+    <h3>Update Password</h3>
+    <form id="passwordForm" onsubmit="submitPasswordForm(event)">
+      <div class="form-group">
+        <label for="passwordCurrentField">Current Password *</label>
+        <input type="password" id="passwordCurrentField" required>
+      </div>
+      <div class="form-group" style="margin-bottom: 24px;">
+        <label for="passwordNewField">New Password *</label>
+        <input type="password" id="passwordNewField" required>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:12px;">
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('passwordChangeModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Change Password</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Prayer Request Log Dialog Modal -->
+<div id="prayerModal" class="modal-overlay">
+  <div class="modal-card">
+    <h3>Spiritual &amp; Pastoral Support</h3>
+    <form id="prayerLogForm" onsubmit="submitPrayerLogForm(event)">
+      <input type="hidden" id="prayerIdField">
+      
+      <div class="form-group">
+        <label>Submitted by</label>
+        <input type="text" id="prayerNameField" readonly style="background:rgba(255,255,255,0.02); opacity:0.8; border-style:dashed;">
+      </div>
+
+      <div class="form-group">
+        <label>Contact Info</label>
+        <input type="text" id="prayerContactField" readonly style="background:rgba(255,255,255,0.02); opacity:0.8; border-style:dashed;">
+      </div>
+
+      <div class="form-group">
+        <label>Prayer Request details</label>
+        <textarea id="prayerTextField" readonly style="background:rgba(255,255,255,0.02); opacity:0.8; border-style:dashed; min-height:80px;"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="prayerStatusField">Pastoral Follow-Up Status</label>
+        <select id="prayerStatusField" required>
+          <option value="pending">Pending</option>
+          <option value="prayed">Prayed For</option>
+          <option value="followed_up">Followed Up / Counseled</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom:24px;">
+        <label for="prayerNotesField">Pastoral Follow-Up Notes</label>
+        <textarea id="prayerNotesField" placeholder="Record pastor interactions, notes, or counseling progress here..."></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:12px;">
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('prayerModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Notes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Partners: Update Registration Status Modal -->
+<div id="partnersModal" class="modal-overlay">
+  <div class="modal-card" style="max-width:480px;">
+    <h3 id="partnersModalTitle">Update Partner Status</h3>
+    <form id="partnersForm" onsubmit="submitPartnerStatusForm(event)">
+      <input type="hidden" id="partnerRecordId">
+      <input type="hidden" id="partnerRecordType">
+
+      <!-- Registration status update -->
+      <div id="partnerStatusSection">
+        <div class="form-group">
+          <label>Partner Name</label>
+          <input type="text" id="partnerNameField" readonly style="background:rgba(255,255,255,0.02); opacity:0.8; border-style:dashed;">
+        </div>
+        <div class="form-group">
+          <label>Partnership Type</label>
+          <input type="text" id="partnerTypeField" readonly style="background:rgba(255,255,255,0.02); opacity:0.8; border-style:dashed;">
+        </div>
+        <div class="form-group" style="margin-bottom:24px;">
+          <label for="partnerStatusSelect">Status *</label>
+          <select id="partnerStatusSelect" required>
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="active">Active Partner</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:12px;">
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('partnersModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Compose Newsletter Modal -->
+<div id="newsletterModal" class="modal-overlay">
+  <div class="modal-card" style="max-width: 600px;">
+    <h3>Broadcast Newsletter</h3>
+    <p style="font-size:0.85rem; opacity:0.6; margin-bottom:16px;">This will send a custom HTML email to all subscribers using your Sender.net configuration.</p>
+    <form id="newsletterForm" onsubmit="submitBroadcastNewsletter(event)">
+      <div style="display:flex; gap:16px; margin-bottom:14px; flex-wrap:wrap;">
+        <div class="form-group" style="flex:1; min-width:200px;">
+          <label for="newsFromName">From Name *</label>
+          <input type="text" id="newsFromName" placeholder="e.g. Revealed Gospel Ministries" required>
+        </div>
+        <div class="form-group" style="flex:1; min-width:200px;">
+          <label for="newsFromEmail">From Email *</label>
+          <input type="email" id="newsFromEmail" placeholder="e.g. newsletters@yourdomain.com" required>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:14px;">
+        <label for="newsSubject">Subject Line *</label>
+        <input type="text" id="newsSubject" placeholder="e.g. RGM August Newsletter: Latest Crusade Updates!" required>
+      </div>
+      <div class="form-group" style="margin-bottom:20px;">
+        <label for="newsHtmlBody">Message Body (HTML allowed) *</label>
+        <textarea id="newsHtmlBody" rows="10" placeholder="Type your newsletter body here. You can use standard <p>, <strong>, <a> tags for formatting." required style="background:rgba(255,255,255,0.04); border:1px solid var(--line); color:inherit; padding:10px; border-radius:4px; width:100%; box-sizing:border-box; resize:vertical;"></textarea>
+      </div>
+
+      <div id="newsletterSendStatus" style="display:none; font-size:0.88rem; margin-bottom:16px; padding:12px; border-radius:4px;"></div>
+
+      <div style="display:flex; justify-content:flex-end; gap:12px;">
+        <button type="button" class="btn btn-outline-dark" onclick="closeModal('newsletterModal')">Cancel</button>
+        <button type="submit" id="newsletterSubmitBtn" class="btn btn-primary">Send to Subscribers</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast">Saved successfully</div>
+
+<!-- Scripts -->
+<script src="portal.js"></script>
+</body>
+</html>
