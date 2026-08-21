@@ -152,6 +152,16 @@ nav.wrap{
   padding-top: 76px;
   overflow:hidden;
 }
+/* Photo hero: add class="hero hero-photo" and style="--hero-image:url('/photos/hero/NAME.jpg')"
+   to any section. Falls back to the plain gradient above until --hero-image is set,
+   so pages without a photo yet are unaffected. */
+.hero-photo{
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 120%, rgba(43,79,143,0.80) 0%, rgba(14,28,59,0.82) 45%, rgba(6,15,34,0.92) 100%),
+    var(--hero-image) center/cover no-repeat,
+    radial-gradient(ellipse 120% 80% at 50% 120%, var(--royal) 0%, var(--ink) 45%, var(--ink-deep) 100%);
+  background-blend-mode: normal;
+}
 .dawn-rays{
   position:absolute; inset:0; z-index:0; opacity:0.55;
   background:
@@ -192,6 +202,14 @@ nav.wrap{
 
 section{ padding: 108px 0; position:relative; }
 section.dark{ background: var(--ink); color: var(--parchment); }
+/* Same idea as .hero-photo but for the flatter page-title bands (charity, crusades, etc).
+   Add class="dark band-photo" and style="--hero-image:url('/photos/hero/NAME.jpg')". */
+section.dark.band-photo{
+  background:
+    linear-gradient(180deg, rgba(6,15,34,0.84), rgba(6,15,34,0.88)),
+    var(--hero-image) center/cover no-repeat,
+    linear-gradient(var(--ink), var(--ink));
+}
 .section-head{ max-width: 640px; margin-bottom: 56px; }
 .section-head .eyebrow{ color: var(--royal); margin-bottom: 18px; }
 .dark .section-head .eyebrow{ color: var(--dawn-gold); }
