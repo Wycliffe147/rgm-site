@@ -4,5 +4,11 @@
 /*.js
   Cache-Control: no-cache, must-revalidate
 
+/*.css
+  Cache-Control: no-cache, must-revalidate
+
 /api/*
   Cache-Control: no-store
+
+/reports/*
+  Cache-Control: public, max-age=86400
