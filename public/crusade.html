@@ -182,6 +182,7 @@
       <div class="crusade-main-col">
         <h3 class="crusade-section-title">The Story & Mission Impact</h3>
         <div id="crusadeFullDescription" class="crusade-story"></div>
+        <div id="crusadeReportMainBanner" style="display:none;"></div>
       </div>
       <div class="crusade-side-col">
         <div class="detail-sidebar-card">
@@ -206,6 +207,7 @@
           </ul>
           <div id="sidebarCTA" style="margin-top:24px;"></div>
         </div>
+        <div id="sidebarReportCard" style="display:none; margin-top:24px;"></div>
       </div>
     </div>
   </div>
@@ -368,6 +370,59 @@
       }
 
       document.getElementById('crusadeDetailsSection').style.display = 'block';
+
+      // Check for official field report
+      const reportInfo = window.CRUSADE_REPORTS && c.slug && window.CRUSADE_REPORTS[c.slug.toLowerCase()];
+      const sidebarReportCard = document.getElementById('sidebarReportCard');
+      const mainReportBanner = document.getElementById('crusadeReportMainBanner');
+      if (reportInfo) {
+        if (sidebarReportCard) {
+          sidebarReportCard.style.display = 'block';
+          sidebarReportCard.innerHTML = `
+            <div class="detail-sidebar-card" style="border: 2px solid var(--dawn-gold); background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.06); padding: 22px;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span style="font-size:1.3rem;">📄</span>
+                <h4 style="margin:0; font-size:1.05rem; color:var(--ink);">Official Field Report</h4>
+              </div>
+              <div style="font-size:0.75rem; font-family:var(--mono); color:var(--royal); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:10px;">
+                ${escapeHtml(reportInfo.pages)} · ${escapeHtml(reportInfo.date)}
+              </div>
+              <p style="font-size:0.86rem; color:#5a5f70; margin-bottom:14px; line-height:1.45;">
+                ${escapeHtml(reportInfo.summary)}
+              </p>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <a href="${reportInfo.pdfUrl}" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center; text-align:center; padding:10px 16px; font-size:0.88rem;">
+                  Read Report (PDF)
+                </a>
+                <a href="${reportInfo.pdfUrl}" download class="btn btn-outline-dark" style="justify-content:center; text-align:center; padding:10px 16px; font-size:0.88rem;">
+                  Download PDF
+                </a>
+              </div>
+            </div>`;
+        }
+        if (mainReportBanner) {
+          mainReportBanner.style.display = 'block';
+          mainReportBanner.innerHTML = `
+            <div style="margin-top:36px; padding:24px 28px; background:#fff; border:1px solid rgba(201,162,74,0.4); border-left:5px solid var(--dawn-gold); border-radius:6px; box-shadow:0 4px 16px rgba(0,0,0,0.04);">
+              <div style="display:flex; justify-content:space-between; align-items:start; flex-wrap:wrap; gap:16px;">
+                <div>
+                  <span class="eyebrow" style="color:var(--royal); margin-bottom:8px;">Sponsor Accountability</span>
+                  <h3 style="margin:0 0 8px 0; font-size:1.25rem; color:var(--ink);">${escapeHtml(reportInfo.title)}</h3>
+                  <p style="margin:0 0 6px 0; font-size:0.92rem; color:var(--dawn-gold); font-weight:600;">✨ ${escapeHtml(reportInfo.highlights)}</p>
+                  <p style="margin:0; font-size:0.9rem; color:#5a5f70; max-width:540px; line-height:1.5;">${escapeHtml(reportInfo.summary)}</p>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:4px;">
+                  <a href="${reportInfo.pdfUrl}" target="_blank" rel="noopener" class="btn btn-primary" style="padding:10px 18px; font-size:0.88rem;">
+                    Read Report (PDF) →
+                  </a>
+                  <a href="${reportInfo.pdfUrl}" download class="btn btn-outline-dark" style="padding:10px 16px; font-size:0.88rem;">
+                    Download
+                  </a>
+                </div>
+              </div>
+            </div>`;
+        }
+      }
 
       if (highlights.length) {
         document.getElementById('crusadeVideos').style.display = '';

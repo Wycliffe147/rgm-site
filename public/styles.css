@@ -1003,3 +1003,70 @@ section:not(.dark) .page-search-input {
 section:not(.dark) .page-search-input::placeholder { color: rgba(14,28,59,0.35); }
 section:not(.dark) .page-search-wrap label { color: var(--ink); }
 
+/* ===== CRUSADE REPORTS & ACCOUNTABILITY ===== */
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+.report-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.report-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--dawn-gold);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+.report-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dawn-gold);
+  background: rgba(201, 162, 74, 0.12);
+  border: 1px solid rgba(201, 162, 74, 0.25);
+  padding: 4px 10px;
+  border-radius: 12px;
+  width: fit-content;
+  margin-bottom: 14px;
+}
+.report-card h3 {
+  font-size: 1.22rem;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+.report-meta {
+  font-size: 0.85rem;
+  color: rgba(247, 243, 234, 0.7);
+  margin-bottom: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.report-summary {
+  font-size: 0.9rem;
+  color: rgba(247, 243, 234, 0.82);
+  line-height: 1.5;
+  margin-bottom: 22px;
+  flex-grow: 1;
+}
+.report-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+

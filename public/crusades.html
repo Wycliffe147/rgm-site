@@ -32,6 +32,7 @@
           <button class="nav-drop-btn">Our Work <span class="drop-arrow">▾</span></button>
           <div class="drop-menu">
             <a href="crusades.html">Crusades</a>
+            <a href="crusades.html#reports">Crusade Reports</a>
             <a href="charity.html">Charity Works</a>
             <a href="testimonies.html">Testimonies</a>
             <a href="excellency.html">Excellency</a>
@@ -100,6 +101,20 @@
   </div>
 </section>
 
+<section class="dark" id="reports" style="padding: 96px 0; border-top: 1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom: 48px;">
+      <div class="eyebrow" style="color: var(--dawn-gold);">Sponsor Accountability &amp; Trust</div>
+      <h2>Crusade Field Reports</h2>
+      <p style="margin-top: 16px; color: rgba(247,243,234,0.85); font-size: 1.05rem; line-height: 1.6; max-width: 680px;">
+        After every gospel campaign, Revealed Gospel Ministries compiles a comprehensive field report detailing documented decisions for Christ, partner church follow-ups, testimonies, and financial stewardship. Read or download our official reports below:
+      </p>
+    </div>
+
+    <div class="report-grid reveal" id="reportsGrid"></div>
+  </div>
+</section>
+
 <footer id="contact">
   <div class="wrap">
     <div class="footer-grid">
@@ -112,6 +127,7 @@
         <ul>
           <li><a href="about.html">About</a></li>
           <li><a href="crusades.html">Crusades</a></li>
+          <li><a href="crusades.html#reports">Crusade Reports</a></li>
           <li><a href="charity.html">Charity Works</a></li>
           <li><a href="testimonies.html">Testimonies</a></li>
           <li><a href="excellency.html">Excellency</a></li>
@@ -162,6 +178,38 @@
 <script>
   loadCrusades('crusadesGrid');
   setupSearch('crusadesSearch', q => loadCrusades('crusadesGrid', null, { search: q }));
+
+  // Render crusade reports
+  const reportsGrid = document.getElementById('reportsGrid');
+  if (reportsGrid && window.DISTINCT_CRUSADE_REPORTS) {
+    reportsGrid.innerHTML = window.DISTINCT_CRUSADE_REPORTS.map(r => `
+      <div class="report-card">
+        <div>
+          <div class="report-badge">📄 ${r.pages} · ${r.date}</div>
+          <h3>${r.title}</h3>
+          <div class="report-meta">
+            <span><strong>Lead:</strong> ${r.leadEvangelist}</span>
+            <span><strong>Coordinator:</strong> ${r.coordinator}</span>
+          </div>
+          <div class="report-summary">
+            <p style="margin-bottom:8px; font-weight:600; color:var(--dawn-gold); font-size:0.88rem;">✨ ${r.highlights}</p>
+            <p style="margin:0; opacity:0.9;">${r.summary}</p>
+          </div>
+        </div>
+        <div class="report-actions">
+          <a href="${r.pdfUrl}" target="_blank" rel="noopener" class="btn btn-primary" style="padding:10px 18px; font-size:0.88rem;">
+            Read Report (PDF)
+          </a>
+          <a href="${r.pdfUrl}" download class="btn btn-outline" style="padding:10px 16px; font-size:0.88rem;">
+            Download
+          </a>
+          <a href="crusade.html?slug=${r.slug}" class="btn btn-outline" style="padding:10px 14px; font-size:0.88rem; opacity:0.8;">
+            View Crusade
+          </a>
+        </div>
+      </div>
+    `).join('');
+  }
 </script>
 <script src="script.js"></script>
 </body>

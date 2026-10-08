@@ -3,6 +3,109 @@
 
 window.storyCache = window.storyCache || {};
 
+// ─── Crusade Field Reports & Accountability Data ─────────────────────────────
+window.CRUSADE_REPORTS = {
+  'edingeni': {
+    title: 'Edingeni Mega Salvation Crusade 2026 Report',
+    crusadeTitle: 'Edingeni Mega Salvation Crusade',
+    date: 'June 2026',
+    pdfUrl: '/reports/edingeni-crusade-report-2026.pdf',
+    pages: '14 Pages',
+    size: '6.8 MB',
+    highlights: '2,000+ Reached · 348 Decisions for Christ',
+    summary: 'Comprehensive 14-page report documenting souls saved, church partner mobilization, ministering teams, and financial stewardship.',
+    coordinator: 'Pastor Alick Nyirenda',
+    leadEvangelist: 'Apostle Mac Kawonga',
+    slug: 'edingeni'
+  },
+  'mpherembe': {
+    title: 'Mpherembe Mega Salvation Crusade 2025 Report',
+    crusadeTitle: 'Mpherembe Mega Salvation Crusade',
+    date: 'November 2025',
+    pdfUrl: '/reports/mpherembe-crusade-report-2025.pdf',
+    pages: '18 Pages',
+    size: '5.8 MB',
+    highlights: '18 Pages · Full Field Mission Overview & Converts Register',
+    summary: 'Detailed report covering evangelism logistics, salvation records, local church follow-up, and partner accountability.',
+    coordinator: 'Pastor Alick Nyirenda',
+    leadEvangelist: 'Apostle Mac Kawonga',
+    slug: 'Mpherembe'
+  },
+  'mzuzu-stadium-2024': {
+    title: 'Mzuzu Revival & Mega Salvation Crusade 2024 Report',
+    crusadeTitle: 'Mzuzu Stadium Mega Salvation Crusade 2024',
+    date: 'June 2024',
+    pdfUrl: '/reports/mzuzu-crusade-report-2024.pdf',
+    pages: '11 Pages',
+    size: '1.4 MB',
+    highlights: '11 Pages · Stadium Revival & Discipleship Report',
+    summary: 'Comprehensive report on the Mzuzu Stadium crusade outreach, soul-winning campaigns, and ministry stewardship submitted to partners.',
+    coordinator: 'Revealed Gospel Ministries',
+    leadEvangelist: 'Apostle Mac Kawonga',
+    slug: 'mzuzu-stadium-2024'
+  },
+  'mzuzu': {
+    title: 'Mzuzu Revival & Mega Salvation Crusade 2024 Report',
+    crusadeTitle: 'Mzuzu Stadium Mega Salvation Crusade 2024',
+    date: 'June 2024',
+    pdfUrl: '/reports/mzuzu-crusade-report-2024.pdf',
+    pages: '11 Pages',
+    size: '1.4 MB',
+    highlights: '11 Pages · Stadium Revival & Discipleship Report',
+    summary: 'Comprehensive report on the Mzuzu Stadium crusade outreach, soul-winning campaigns, and ministry stewardship submitted to partners.',
+    coordinator: 'Revealed Gospel Ministries',
+    leadEvangelist: 'Apostle Mac Kawonga',
+    slug: 'mzuzu'
+  },
+  'kapiri-2023': {
+    title: 'Kapiri Mega Salvation Crusade 2023 Report',
+    crusadeTitle: 'Kapiri Mega Salvation Crusade 2023',
+    date: 'October 2023',
+    pdfUrl: '/reports/kapiri-crusade-report-2023.pdf',
+    pages: '11 Pages',
+    size: '2.9 MB',
+    highlights: '11 Pages · Rural Evangelism & Church Mobilization',
+    summary: 'Field report on the Kapiri gospel crusade in Mchinji, documenting decisions for Christ and local follow-up stewardship.',
+    coordinator: 'Pastor Alick Nyirenda',
+    leadEvangelist: 'Apostle Mac Kawonga',
+    slug: 'kapiri-2023'
+  },
+  'enukweni': {
+    title: 'Enukweni Mega Salvation Crusade 2023 Report',
+    crusadeTitle: 'Enukweni Mega Salvation Crusade',
+    date: 'June 2023',
+    pdfUrl: '/reports/enukweni-crusade-report-2023.pdf',
+    pages: '11 Pages',
+    size: '3.8 MB',
+    highlights: '11 Pages · Community Outreach & Discipleship Integration',
+    summary: 'Detailed field documentation for the Enukweni gospel outreach, church network involvement, testimonies, and accountability.',
+    coordinator: 'Pastor Alick Nyirenda',
+    leadEvangelist: 'Apostle Mac Kawonga',
+    slug: 'enukweni'
+  },
+  'emukweni-2023': {
+    title: 'Enukweni Mega Salvation Crusade 2023 Report',
+    crusadeTitle: 'Enukweni Mega Salvation Crusade',
+    date: 'June 2023',
+    pdfUrl: '/reports/enukweni-crusade-report-2023.pdf',
+    pages: '11 Pages',
+    size: '3.8 MB',
+    highlights: '11 Pages · Community Outreach & Discipleship Integration',
+    summary: 'Detailed field documentation for the Enukweni gospel outreach, church network involvement, testimonies, and accountability.',
+    coordinator: 'Pastor Alick Nyirenda',
+    leadEvangelist: 'Apostle Mac Kawonga',
+    slug: 'emukweni-2023'
+  }
+};
+
+window.DISTINCT_CRUSADE_REPORTS = [
+  window.CRUSADE_REPORTS['edingeni'],
+  window.CRUSADE_REPORTS['mpherembe'],
+  window.CRUSADE_REPORTS['mzuzu-stadium-2024'],
+  window.CRUSADE_REPORTS['kapiri-2023'],
+  window.CRUSADE_REPORTS['enukweni']
+];
+
 const DEFAULT_PAGE_SIZE = 6;
 
 function extractYouTubeId(url) {
@@ -82,10 +185,14 @@ function crusadeCardHTML(c) {
   const isUpcoming = c.status === 'upcoming';
   const badgeLabel = isUpcoming ? 'Upcoming' : 'Past';
   const giveHref = 'give.html';
+  const reportInfo = window.CRUSADE_REPORTS && c.slug && window.CRUSADE_REPORTS[c.slug.toLowerCase()];
+  const reportBtn = reportInfo
+    ? `<a href="${reportInfo.pdfUrl}" target="_blank" rel="noopener" class="btn btn-outline-dark" style="border-color:var(--dawn-gold);"><span style="font-size:0.85rem;">📄</span> Read Report</a>`
+    : '';
   const buttonsHTML = isUpcoming
     ? `<a href="${giveHref}" class="btn btn-outline-dark">Support</a>
        <a href="crusade.html?slug=${c.slug}" class="btn btn-outline-dark">See Details</a>`
-    : `<a href="crusade.html?slug=${c.slug}" class="btn btn-outline-dark">See Highlights &amp; More</a>`;
+    : `<a href="crusade.html?slug=${c.slug}" class="btn btn-outline-dark">See Highlights &amp; More</a>${reportBtn}`;
 
   return `
     <div class="crusade-card">
