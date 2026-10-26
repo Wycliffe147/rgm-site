@@ -25,7 +25,15 @@ function togglePasswordVisibility(inputId, btn) {
     eyeOff.style.display = isPassword ? 'block' : 'none';
   }
   btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
-  btn.style.color = isPassword ? 'var(--dawn-gold)' : 'rgba(255,255,255,0.6)';
+  if (isPassword) {
+    btn.style.color = '#b45309';
+    btn.style.background = '#fef3c7';
+    btn.style.borderColor = '#f59e0b';
+  } else {
+    btn.style.color = '#0f172a';
+    btn.style.background = '#f1f5f9';
+    btn.style.borderColor = '#cbd5e1';
+  }
 }
 
 // On Page Load
