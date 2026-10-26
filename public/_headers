@@ -1,14 +1,17 @@
-/*.html
-  Cache-Control: no-cache, must-revalidate
+/data.js
+  Cache-Control: no-cache, no-store, must-revalidate
 
-/*.js
-  Cache-Control: no-cache, must-revalidate
+/script.js
+  Cache-Control: no-cache, no-store, must-revalidate
 
-/*.css
-  Cache-Control: no-cache, must-revalidate
+/styles.css
+  Cache-Control: no-cache, no-store, must-revalidate
 
 /api/*
   Cache-Control: no-store
 
 /reports/*
   Cache-Control: public, max-age=86400
+
+/*
+  Cache-Control: no-cache, must-revalidate
