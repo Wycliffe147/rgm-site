@@ -13,6 +13,21 @@ let editingUserId = null;
 // { crusadeId, crusadeTitle, date, serviceName, ministerName, count: 0 }
 let sessionState = null;
 
+function togglePasswordVisibility(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  const isPassword = input.type === 'password';
+  input.type = isPassword ? 'text' : 'password';
+  const eye = btn.querySelector('.eye-icon');
+  const eyeOff = btn.querySelector('.eye-off-icon');
+  if (eye && eyeOff) {
+    eye.style.display = isPassword ? 'none' : 'block';
+    eyeOff.style.display = isPassword ? 'block' : 'none';
+  }
+  btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+  btn.style.color = isPassword ? 'var(--dawn-gold)' : 'rgba(255,255,255,0.6)';
+}
+
 // On Page Load
 document.addEventListener('DOMContentLoaded', () => {
   verifySession();
