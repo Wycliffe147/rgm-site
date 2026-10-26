@@ -5,6 +5,19 @@ window.storyCache = window.storyCache || {};
 
 // ─── Crusade Field Reports & Accountability Data ─────────────────────────────
 window.CRUSADE_REPORTS = {
+  'vongo': {
+    title: 'Vongo Mega Salvation Crusade 2026 Report',
+    crusadeTitle: 'Vongo, Rumphi Mega Salvation Crusade',
+    date: 'October 2026',
+    pdfUrl: '/reports/vongo-crusade-report-2026.pdf',
+    pages: '25 Pages',
+    size: '4.9 MB',
+    highlights: 'Three-Day Crusade · School Evangelism · Sports Bonanza · 173 Souls Won Through Sports',
+    summary: 'Comprehensive 25-page report documenting the Vongo crusade activities including open-air evangelism, Vongo CDSS school outreach, prayer marathons, door-to-door evangelism, leadership training, football & netball bonanza, and financial stewardship.',
+    coordinator: 'Pastor Alick Nyirenda',
+    leadEvangelist: 'Apostle Mac Kawonga',
+    slug: 'vongo'
+  },
   'edingeni': {
     title: 'Edingeni Mega Salvation Crusade 2026 Report',
     crusadeTitle: 'Edingeni Mega Salvation Crusade',
@@ -99,6 +112,7 @@ window.CRUSADE_REPORTS = {
 };
 
 window.DISTINCT_CRUSADE_REPORTS = [
+  window.CRUSADE_REPORTS['vongo'],
   window.CRUSADE_REPORTS['edingeni'],
   window.CRUSADE_REPORTS['mpherembe'],
   window.CRUSADE_REPORTS['mzuzu-stadium-2024'],
